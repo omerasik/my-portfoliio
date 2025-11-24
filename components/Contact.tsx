@@ -148,7 +148,8 @@ export default function Contact() {
         className="text-center relative z-10"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true, amount: 0.3 }}
       >
         <p className="text-sm uppercase tracking-[0.4em] text-accent-pink mb-4">GET IN TOUCH</p>
         <h2 className="font-display text-5xl md:text-7xl text-white mb-6">
@@ -162,15 +163,17 @@ export default function Contact() {
         {/* Contact Info */}
         <motion.div 
           className="space-y-8"
-          initial={{ opacity: 0, x: -50 }}
+          initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <motion.p 
             className="text-lg text-white/80 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
           >
             I am available for full-stack roles, and collaborations on real-world products. 
             If you need someone who can take a concept from idea to working prototype, let&apos;s talk.

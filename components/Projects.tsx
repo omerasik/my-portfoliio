@@ -41,7 +41,7 @@ export default function Projects() {
       className="section-padding space-y-12"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.7 }}
     >
       <div className="space-y-4 text-center">

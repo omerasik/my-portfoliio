@@ -69,7 +69,7 @@ export default function Skills() {
       className="section-padding space-y-10"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.7 }}
     >
       <SectionHeader
@@ -80,7 +80,7 @@ export default function Skills() {
       />
 
       {/* Grid layout matching other sections */}
-      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-4 gap-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         {technologies.map((skill, index) => {
           const glow = rgbaFromHex(skill.rimColor ?? skill.brandColor, 0.3);
 
