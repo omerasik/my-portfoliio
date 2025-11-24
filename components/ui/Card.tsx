@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { MotionProps } from "framer-motion";
 import type { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
@@ -8,10 +9,12 @@ type CardProps = HTMLAttributes<HTMLDivElement> & {
   glow?: boolean;
 };
 
+type MotionDivProps = MotionProps & HTMLAttributes<HTMLDivElement>;
+
 export default function Card({ className, children, glow = true, ...props }: CardProps) {
   return (
     <motion.div
-      {...props}
+      {...(props as MotionDivProps)}
       whileHover={{ y: -4 }}
       className={cn(
         "group relative overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-6 shadow-card backdrop-blur-xl transition duration-300",

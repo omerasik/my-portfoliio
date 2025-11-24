@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { MotionProps } from "framer-motion";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -9,10 +10,12 @@ type IconButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   children: ReactNode;
 };
 
+type MotionAnchorProps = MotionProps & AnchorHTMLAttributes<HTMLAnchorElement>;
+
 export default function IconButton({ label, children, className, ...props }: IconButtonProps) {
   return (
     <motion.a
-      {...props}
+      {...(props as MotionAnchorProps)}
       aria-label={label}
       className={cn(
         "inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition",

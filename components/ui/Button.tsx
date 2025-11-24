@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { MotionProps } from "framer-motion";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -29,6 +30,9 @@ const sizes: Record<NonNullable<ButtonProps["size"]>, string> = {
   lg: "px-8 py-4 text-base"
 };
 
+type MotionAnchorProps = MotionProps & AnchorHTMLAttributes<HTMLAnchorElement>;
+type MotionButtonProps = MotionProps & ButtonHTMLAttributes<HTMLButtonElement>;
+
 export default function Button({
   variant = "primary",
   size = "md",
@@ -45,8 +49,8 @@ export default function Button({
         href={href}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         whileHover={{ scale: 1.03, y: -2 }}
-        whileTap={{ scale: 0.97 }}
-        {...anchorProps}
+        whileTap={{ scale: 0.97, y: 0 }}
+        {...(anchorProps as MotionAnchorProps)}
       >
         {icon && <span className="mr-2 inline-flex">{icon}</span>}
         {children}
@@ -69,7 +73,7 @@ export default function Button({
       )}
       whileHover={isDisabled ? undefined : { scale: 1.03, y: -2 }}
       whileTap={isDisabled ? undefined : { scale: 0.97 }}
-      {...buttonProps}
+      {...(buttonProps as MotionButtonProps)}
     >
       {icon && <span className="mr-2 inline-flex">{icon}</span>}
       {children}
