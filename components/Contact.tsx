@@ -155,7 +155,7 @@ export default function Contact() {
           Contact<span className="text-accent-pink">.</span>
         </h2>
         <p className="text-white/70 text-lg max-w-2xl mx-auto">
-          Let's talk about your next project. I build modern full-stack apps, dashboards, and integrations.
+          Let&apos;s talk about your next project. I build modern full-stack apps, dashboards, and integrations.
         </p>
       </motion.div>
       <div className="grid gap-12 lg:grid-cols-2 relative z-10">
@@ -173,7 +173,7 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             I am available for full-stack roles, and collaborations on real-world products. 
-            If you need someone who can take a concept from idea to working prototype, let's talk.
+            If you need someone who can take a concept from idea to working prototype, let&apos;s talk.
           </motion.p>
 
           <div className="space-y-6">
