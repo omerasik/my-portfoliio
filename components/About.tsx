@@ -43,10 +43,10 @@ export default function About() {
   return (
     <motion.section
       id="about"
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.7 }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: 0.3 }}
       className="section-padding space-y-10"
     >
       <SectionHeader
@@ -106,8 +106,8 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card className="group h-full p-6 transition-all duration-300 hover:border-accent-cyan/40">
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan transition-all duration-300 group-hover:border-accent-cyan/50 group-hover:bg-accent-cyan/20">
+                <Card className="group h-full p-6 transition-all duration-200 hover:border-accent-cyan/40">
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan transition-all duration-200 group-hover:border-accent-cyan/50 group-hover:bg-accent-cyan/20">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h4 className="mb-2 font-display text-lg text-white">{value.title}</h4>

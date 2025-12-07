@@ -8,9 +8,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 type SkillCategory =
   | "Languages"
   | "Frameworks & Backend"
-  | "CMS & Backend Tools"
-  | "Databases"
-  | "Other Tools";
+  | "Platforms & Tools";
 
 type SkillBadge = {
   name: string;
@@ -21,11 +19,15 @@ type SkillBadge = {
 };
 
 const technologies: SkillBadge[] = [
+  // Languages
   { name: "JavaScript", category: "Languages", brandColor: "#F7DF1E", asset: "/logos/javascript.svg" },
   { name: "TypeScript", category: "Languages", brandColor: "#3178C6", asset: "/logos/typescript.svg" },
+  { name: "PHP", category: "Languages", brandColor: "#777BB4", asset: "/logos/php.png" },
+  { name: "Python", category: "Languages", brandColor: "#3776AB", asset: "/logos/python.svg" },
   { name: "HTML5", category: "Languages", brandColor: "#E34F26", asset: "/logos/html5.svg" },
   { name: "CSS3", category: "Languages", brandColor: "#1572B6", asset: "/logos/css3.svg" },
-  { name: "Python", category: "Languages", brandColor: "#3776AB", asset: "/logos/python.svg" },
+  
+  // Frameworks & Backend
   { name: "React Native", category: "Frameworks & Backend", brandColor: "#61DAFB", asset: "/logos/react.svg" },
   {
     name: "Next.js",
@@ -37,20 +39,21 @@ const technologies: SkillBadge[] = [
   { name: "Node.js", category: "Frameworks & Backend", brandColor: "#3C873A", asset: "/logos/nodedotjs.svg" },
   { name: "Express.js", category: "Frameworks & Backend", brandColor: "#FFFFFF", asset: "/logos/express.svg" },
   { name: "Laravel", category: "Frameworks & Backend", brandColor: "#F9322C", asset: "/logos/laravel.svg" },
-  { name: "Craft CMS", category: "CMS & Backend Tools", brandColor: "#E5422B", asset: "/logos/craftcms.svg" },
-  { name: "Strapi", category: "CMS & Backend Tools", brandColor: "#2F2E8B", asset: "/logos/strapi.svg" },
-  { name: "Prisma ORM", category: "CMS & Backend Tools", brandColor: "#0C344B", asset: "/logos/prisma.svg" },
-  { name: "Supabase", category: "CMS & Backend Tools", brandColor: "#3ECF8E", asset: "/logos/supabase.svg" },
-  { name: "MySQL", category: "Databases", brandColor: "#00758F", asset: "/logos/mysql.svg" },
-  { name: "PostgreSQL", category: "Databases", brandColor: "#336791", asset: "/logos/postgresql.svg" },
-  { name: "MongoDB", category: "Databases", brandColor: "#47A248", asset: "/logos/mongodb.png" },
-  { name: "Tailwind CSS", category: "Other Tools", brandColor: "#06B6D4", asset: "/logos/tailwindcss.svg" },
-  { name: "Vite", category: "Other Tools", brandColor: "#646CFF", asset: "/logos/vite.svg" },
-  { name: "n8n", category: "Other Tools", brandColor: "#F05A28", asset: "/logos/n8n.png" },
-  { name: "Figma", category: "Other Tools", brandColor: "#F24E1E", asset: "/logos/figma.png" },
-  { name: "Git", category: "Other Tools", brandColor: "#F05033", asset: "/logos/git.svg" },
-  { name: "GitHub", category: "Other Tools", brandColor: "#ffffffff", rimColor: "#181717", asset: "/logos/github.png" },
-  { name: "Docker", category: "Other Tools", brandColor: "#0DB7ED", asset: "/logos/docker.svg" }
+  { name: "MySQL", category: "Frameworks & Backend", brandColor: "#00758F", asset: "/logos/mysql.svg" },
+  { name: "PostgreSQL", category: "Frameworks & Backend", brandColor: "#336791", asset: "/logos/postgresql.svg" },
+  
+  // Platforms & Tools
+  { name: "Craft CMS", category: "Platforms & Tools", brandColor: "#E5422B", asset: "/logos/craftcms.svg" },
+  { name: "Strapi", category: "Platforms & Tools", brandColor: "#2F2E8B", asset: "/logos/strapi.svg" },
+  { name: "Prisma ORM", category: "Platforms & Tools", brandColor: "#0C344B", asset: "/logos/prisma.svg" },
+  { name: "Supabase", category: "Platforms & Tools", brandColor: "#3ECF8E", asset: "/logos/supabase.svg" },
+  { name: "Tailwind CSS", category: "Platforms & Tools", brandColor: "#06B6D4", asset: "/logos/tailwindcss.svg" },
+  { name: "Vite", category: "Platforms & Tools", brandColor: "#646CFF", asset: "/logos/vite.svg" },
+  { name: "n8n", category: "Platforms & Tools", brandColor: "#F05A28", asset: "/logos/n8n.png" },
+  { name: "Figma", category: "Platforms & Tools", brandColor: "#F24E1E", asset: "/logos/figma_logo.png" },
+  { name: "Git", category: "Platforms & Tools", brandColor: "#F05033", asset: "/logos/git.svg" },
+  { name: "GitHub", category: "Platforms & Tools", brandColor: "#ffffffff", rimColor: "#181717", asset: "/logos/github.png" },
+  { name: "Docker", category: "Platforms & Tools", brandColor: "#0DB7ED", asset: "/logos/docker.svg" }
 ];
 
 const rgbaFromHex = (hex: string, alpha: number) => {
@@ -62,86 +65,123 @@ const rgbaFromHex = (hex: string, alpha: number) => {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
+const categoryLabels: Record<SkillCategory, string> = {
+  "Languages": "CORE LANGUAGES",
+  "Frameworks & Backend": "FRAMEWORKS & DATABASES",
+  "Platforms & Tools": "DEVELOPMENT TOOLS"
+};
+
+const categoryDescriptions: Record<SkillCategory, string> = {
+  "Languages": "Programming languages I work with daily",
+  "Frameworks & Backend": "Full-stack frameworks and database systems",
+  "Platforms & Tools": "Essential tools for modern development"
+};
+
 export default function Skills() {
+  const categories: SkillCategory[] = ["Languages", "Frameworks & Backend", "Platforms & Tools"];
+
   return (
     <motion.section
       id="skills"
-      className="section-padding space-y-10"
-      initial={{ opacity: 0, y: 40 }}
+      className="section-padding space-y-16"
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.7 }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: 0.3 }}
     >
       <SectionHeader
         eyebrow="Skills"
-        title="Professional Skills"
+        title="Tech Stack"
         description="Tools and technologies I use to design, build, and ship full-stack software."
         align="center"
       />
 
-      {/* Grid layout matching other sections */}
-      <div className="grid grid-cols-4 gap-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-        {technologies.map((skill, index) => {
-          const glow = rgbaFromHex(skill.rimColor ?? skill.brandColor, 0.3);
-
+      {/* Categories */}
+      <div className="space-y-12">
+        {categories.map((category, categoryIndex) => {
+          const categorySkills = technologies.filter(skill => skill.category === category);
+          
           return (
             <motion.div
-              key={skill.name}
+              key={category}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.03 }}
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
-              className="group relative"
+              transition={{ duration: 0.3, delay: categoryIndex * 0.1 }}
+              className="space-y-6"
             >
-              {/* Card container */}
-              <div
-                className={cn(
-                  "relative flex h-[140px] flex-col items-center justify-center overflow-hidden",
-                  "rounded-2xl border border-white/5 bg-gradient-to-br from-white/[0.07] to-white/[0.02]",
-                  "p-6 shadow-lg backdrop-blur-sm transition-all duration-300",
-                  "hover:border-white/10 hover:shadow-xl"
-                )}
-              >
-                {/* Glow effect on hover */}
-                <motion.div
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    background: `radial-gradient(circle at 50% 50%, ${glow}, transparent 70%)`
-                  }}
-                />
+              {/* Category Header */}
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-white/90">
+                  {categoryLabels[category]}
+                </h3>
+                <p className="text-sm text-white/50">{categoryDescriptions[category]}</p>
+              </div>
 
-                {/* Glass reflection */}
-                <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-50" />
+              {/* Skills Grid */}
+              <div className="flex flex-wrap gap-3">
+                {categorySkills.map((skill, index) => {
+                  const glow = rgbaFromHex(skill.rimColor ?? skill.brandColor, 0.3);
 
-                {/* Icon */}
-                <div className="relative z-10 flex items-center justify-center">
-                  <Image
-                    src={skill.asset}
-                    alt={`${skill.name} logo`}
-                    width={56}
-                    height={56}
-                    className={cn(
-                      "transition-transform duration-300 group-hover:scale-110",
-                      skill.name === "GitHub" ? "h-16 w-16" : "h-14 w-14"
-                    )}
-                  />
-                </div>
+                  return (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      whileHover={{
+                        scale: 1.05,
+                        y: -3,
+                        transition: { duration: 0.2 }
+                      }}
+                      className="group relative"
+                    >
+                      {/* Skill Badge */}
+                      <div
+                        className={cn(
+                          "relative flex items-center gap-3 overflow-hidden",
+                          "rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02]",
+                          "px-4 py-3 shadow-lg backdrop-blur-sm transition-all duration-300",
+                          "hover:border-white/20 hover:shadow-xl"
+                        )}
+                      >
+                        {/* Glow effect on hover */}
+                        <motion.div
+                          className="pointer-events-none absolute inset-0 rounded-xl opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100"
+                          style={{
+                            background: `radial-gradient(circle at 50% 50%, ${glow}, transparent 70%)`
+                          }}
+                        />
 
-                {/* Skill name */}
-                <p className="relative z-10 mt-4 text-center text-xs font-medium text-white/70 transition-colors duration-300 group-hover:text-white">
-                  {skill.name}
-                </p>
+                        {/* Glass reflection */}
+                        <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-50" />
 
-                {/* Color indicator dot */}
-                <div
-                  className="absolute bottom-3 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{ backgroundColor: skill.brandColor }}
-                />
+                        {/* Icon */}
+                        <div className="relative z-10 flex items-center justify-center">
+                          <Image
+                            src={skill.asset}
+                            alt={`${skill.name} logo`}
+                            width={24}
+                            height={24}
+                            className="h-6 w-6 transition-transform duration-300 group-hover:scale-110"
+                          />
+                        </div>
+
+                        {/* Skill name */}
+                        <span className="relative z-10 text-sm font-medium text-white/80 transition-colors duration-300 group-hover:text-white whitespace-nowrap">
+                          {skill.name}
+                        </span>
+
+                        {/* Color indicator */}
+                        <div
+                          className="absolute right-2 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                          style={{ backgroundColor: skill.brandColor }}
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           );

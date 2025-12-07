@@ -61,7 +61,7 @@ export type ContactDetail = {
 export const navItems: NavItem[] = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
-  { label: "Education", href: "#education" },
+  // { label: "Education", href: "#education" },
   { label: "Skills", href: "#skills" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
@@ -214,7 +214,7 @@ export const services: Service[] = [
 export const projects: Project[] = [
   {
     category: "FULL-STACK",
-    title: "📚 The Grand Library",
+    title: "The Grand Library",
     description: "Book discovery platform for Artevelde students with wishlist, ratings, role-based borrowing and staff management.",
     stack: ["Next.js 15", "TypeScript", "Prisma", "NextAuth", "SQLite"],
     image: "/images/grandlibrary.png",
@@ -224,9 +224,9 @@ export const projects: Project[] = [
   },
   {
     category: "FULL-STACK",
-    title: "🛍️ Laravel Webshop + Filament Admin",
+    title: "Laravel Webshop + Filament Admin",
     description: "E-commerce webshop with admin dashboard, product filters, branded email system and secure checkout.",
-    stack: ["Laravel", "Filament", "MySQL", "Tailwind", "Breeze"],
+    stack: ["Laravel", "Filament", "MySQL", "Tailwind"],
     image: "/images/webshop.png",
     links: [
       { label: "View on GitHub", href: "https://github.com/omerasik/laravel-webshop-filament", icon: "Github", variant: "primary" }
@@ -234,7 +234,7 @@ export const projects: Project[] = [
   },
   {
     category: "HEADLESS CMS",
-    title: "🏠 Craft Multi-Site CMS",
+    title: "Craft Multi-Site CMS",
     description: "Enterprise multi-site content platform for Mariahuis, Sint-Coleta and Cultuur-Colette with Twig templates & Docker.",
     stack: ["Craft CMS", "Twig", "Docker", "DDEV", "Composer"],
     image: "/images/craftcms.png",
@@ -243,18 +243,69 @@ export const projects: Project[] = [
     ]
   },
   {
+    category: "FRONTEND",
+    title: "STAM Museum Gent",
+    description: "Responsive replica of STAM Gent city museum website built from Figma design. Features hamburger navigation, semantic HTML structure, and fully responsive layout optimized for all devices.",
+    stack: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    image: "/images/stam.png",
+    links: [
+      { label: "View Live", href: "https://omerasik.github.io/stam_museum_gent/index.html", icon: "ArrowUpRight", variant: "primary" },
+      { label: "View on GitHub", href: "https://github.com/omerasik/stam_museum_gent", icon: "Github", variant: "secondary" }
+    ],
+    features: [
+      "Pixel-perfect recreation from Figma design",
+      "Fully responsive across mobile, tablet, and desktop",
+      "Interactive hamburger menu with smooth animations",
+      "SEO-optimized with proper meta tags and robots.txt"
+    ]
+  },
+  {
+    category: "FRONTEND",
+    title: "Gamescom 2024",
+    description: "Interactive gaming information website showcasing current games, industry trends, and insights about the future of gaming. Built with modern vanilla JavaScript and fully responsive design.",
+    stack: ["HTML5", "CSS3", "Vanilla JavaScript"],
+    image: "/images/gamescom.png",
+    links: [
+      { label: "View Live", href: "https://omerasik.github.io/gamescom-2024/", icon: "ArrowUpRight", variant: "primary" },
+      { label: "View on GitHub", href: "https://github.com/omerasik/gamescom-2024", icon: "Github", variant: "secondary" }
+    ],
+    features: [
+      "Responsive design optimized for all devices",
+      "Interactive game cards with detailed information",
+      "Modern and user-friendly interface",
+      "Fast and smooth browsing experience"
+    ]
+  },
+  {
+    category: "FRONTEND",
+    title: "Best of 2024",
+    description: "Interactive website showcasing the best content of 2024 including albums, games, films, movies and timeless picks. Features theme toggle, slideshow, honorable mentions modal, and API data loading.",
+    stack: ["HTML", "CSS", "JavaScript", "REST API"],
+    image: "/images/bestof_.png",
+    links: [
+      { label: "View Live", href: "https://pgm-2425-atwork-1.github.io/project-2-omerasik/", icon: "ArrowUpRight", variant: "primary" },
+      { label: "View on GitHub", href: "https://github.com/pgm-2425-atwork-1/project-2-omerasik", icon: "Github", variant: "secondary" }
+    ],
+    features: [
+      "Dark/Light theme toggle with smooth transitions",
+      "Interactive slideshow for content navigation",
+      "Modal window for honorable mentions",
+      "Dynamic data loading from external API"
+    ]
+  },
+  {
     category: "FULL-STACK",
-    title: "🧾 Make It Happen (To-Do + Categories)",
+    title: "Make It Happen (To-Do + Categories)",
     description: "Task organizer with JWT login, protected categories and user-specific dashboards using EJS + SQLite ORM.",
     stack: ["Node.js", "Express", "EJS", "Knex", "Objection.js"],
-    image: "/images/make_it_happen.png",
+    image: "/images/to_do_app.png",
     links: [
       { label: "View on GitHub", href: "https://github.com/omerasik/to-do-make-it-happen-", icon: "Github", variant: "primary" }
     ]
   },
   {
     category: "FULL-STACK",
-    title: "🎓 Student Tracking System (In Progress)",
+    title: "Student Tracking System (In Progress)",
     description: "Scheduling and student presence management app for teachers with secure roles, dashboard and analytics.",
     stack: ["Next.js", "Strapi", "PostgreSQL", "JWT Auth"],
     image: "/images/student_tracking.png",
@@ -265,7 +316,7 @@ export const projects: Project[] = [
   },
   {
     category: "MOBILE APP — CURRENT PROJECT",
-    title: "📱 QR Student Attendance App (In Progress)",
+    title: "QR Student Attendance App (In Progress)",
     description: "Mobile scanner & presence tracker with QR code scanning, campus location logging, and role-based actions.",
     stack: ["React Native", "Expo", "Supabase", "Haptics API", "Location API"],
     image: "/images/attendance.png",

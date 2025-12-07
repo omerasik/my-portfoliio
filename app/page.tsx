@@ -12,7 +12,7 @@ export default function HomePage() {
     <main className="relative mx-auto max-w-6xl">
       <Hero />
       <About />
-      <Education />
+      {/* <Education /> */}
       <Skills />
       <Services />
       <Projects />

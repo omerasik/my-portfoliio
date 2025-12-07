@@ -1,102 +1,28 @@
 ﻿"use client";
 
-import { useState } from "react";
-import type { ChangeEvent, FormEvent, ReactNode } from "react";
 import { motion } from "framer-motion";
-import { AlertCircle, CheckCircle2, Github, Linkedin, Loader2, Mail, MapPin, Phone } from "lucide-react";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
 import { contactDetails } from "@/lib/data";
 import type { ContactDetail } from "@/lib/data";
 
-const detailIcons: Record<ContactDetail["icon"], ReactNode> = {
+const detailIcons: Record<ContactDetail["icon"], React.ReactNode> = {
   Mail: <Mail className="h-5 w-5" />,
   Phone: <Phone className="h-5 w-5" />,
   MapPin: <MapPin className="h-5 w-5" />,
   Linkedin: <Linkedin className="h-5 w-5" />,
-  Github: <Github className="h-5 w-5" />
+  Github: null
 };
-
-const initialForm = {
-  fullName: "",
-  email: "",
-  subject: "",
-  message: ""
-};
-
-type FormState = typeof initialForm;
-
-type FormErrors = Partial<Record<keyof FormState, string>>;
-
-type FormStatus = "idle" | "loading" | "success" | "validation-error" | "server-error";
 
 export default function Contact() {
-  const [form, setForm] = useState<FormState>(initialForm);
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<FormStatus>("idle");
-
-  const handleChange = (field: keyof FormState) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [field]: event.target.value }));
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
-    }
-    setStatus((prev) => (prev === "loading" ? prev : "idle"));
-  };
-
-  const validate = () => {
-    const newErrors: FormErrors = {};
-    if (!form.fullName.trim()) newErrors.fullName = "Please enter your name.";
-    if (!form.email.trim()) {
-      newErrors.email = "Email is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      newErrors.email = "Please provide a valid email.";
-    }
-    if (!form.subject.trim()) newErrors.subject = "Please add a subject.";
-    if (!form.message.trim()) newErrors.message = "Let me know how I can help.";
-    return newErrors;
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const validation = validate();
-    setErrors(validation);
-    if (Object.keys(validation).length > 0) {
-      setStatus("validation-error");
-      return;
-    }
-    setStatus("loading");
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(form)
-      });
-
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
-
-      setStatus("success");
-      setForm(initialForm);
-      setErrors({});
-    } catch (error) {
-      console.error("Contact form submission failed", error);
-      setStatus("server-error");
-    }
-  };
-
   return (
     <motion.section
       id="contact"
       className="relative section-padding space-y-16 overflow-hidden"
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7 }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: 0.3 }}
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
@@ -148,7 +74,7 @@ export default function Contact() {
         className="text-center relative z-10"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         viewport={{ once: true, amount: 0.3 }}
       >
         <p className="text-sm uppercase tracking-[0.4em] text-accent-pink mb-4">GET IN TOUCH</p>
@@ -165,14 +91,14 @@ export default function Contact() {
           className="space-y-8"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
           viewport={{ once: true, amount: 0.2 }}
         >
           <motion.p 
             className="text-lg text-white/80 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             viewport={{ once: true, amount: 0.3 }}
           >
             I am available for full-stack roles, and collaborations on real-world products. 
@@ -183,7 +109,7 @@ export default function Contact() {
             {contactDetails.slice(0, 2).map((detail, index) => (
               <motion.div
                 key={detail.label}
-                className="flex items-center gap-6 p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300"
+                className="flex items-center gap-6 p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-200"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
@@ -220,105 +146,34 @@ export default function Contact() {
             ))}
           </motion.div>
         </motion.div>
-        {/* Contact Form */}
+        
+        {/* Send Email Button */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex items-center justify-center"
         >
-        <Card className="backdrop-blur-sm bg-white/5 border-white/10">
-          <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-            <div>
-              <label htmlFor="fullName" className="text-xs uppercase tracking-[0.4em] text-white/50">
-                Full Name
-              </label>
-              <input
-                id="fullName"
-                type="text"
-                value={form.fullName}
-                onChange={handleChange("fullName")}
-                className={`mt-2 w-full rounded-2xl border bg-transparent px-4 py-3 text-white focus:border-accent-cyan focus:outline-none ${
-                  errors.fullName ? "border-[#ff4d6d]" : "border-white/15"
-                }`}
-              />
-              {errors.fullName && <p className="mt-1 text-sm text-[#ff4d6d]">{errors.fullName}</p>}
-            </div>
-            <div>
-              <label htmlFor="email" className="text-xs uppercase tracking-[0.4em] text-white/50">
-                Email Address
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={form.email}
-                onChange={handleChange("email")}
-                className={`mt-2 w-full rounded-2xl border bg-transparent px-4 py-3 text-white focus:border-accent-cyan focus:outline-none ${
-                  errors.email ? "border-[#ff4d6d]" : "border-white/15"
-                }`}
-              />
-              {errors.email && <p className="mt-1 text-sm text-[#ff4d6d]">{errors.email}</p>}
-            </div>
-            <div>
-              <label htmlFor="subject" className="text-xs uppercase tracking-[0.4em] text-white/50">
-                Subject
-              </label>
-              <input
-                id="subject"
-                type="text"
-                value={form.subject}
-                onChange={handleChange("subject")}
-                className={`mt-2 w-full rounded-2xl border bg-transparent px-4 py-3 text-white focus:border-accent-cyan focus:outline-none ${
-                  errors.subject ? "border-[#ff4d6d]" : "border-white/15"
-                }`}
-              />
-              {errors.subject && <p className="mt-1 text-sm text-[#ff4d6d]">{errors.subject}</p>}
-            </div>
-            <div>
-              <label htmlFor="message" className="text-xs uppercase tracking-[0.4em] text-white/50">
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                value={form.message}
-                onChange={handleChange("message")}
-                className={`mt-2 w-full rounded-2xl border bg-transparent px-4 py-3 text-white focus:border-accent-cyan focus:outline-none ${
-                  errors.message ? "border-[#ff4d6d]" : "border-white/15"
-                }`}
-              />
-              {errors.message && <p className="mt-1 text-sm text-[#ff4d6d]">{errors.message}</p>}
-            </div>
-            <Button type="submit" className="w-full" disabled={status === "loading"}>
-              {status === "loading" ? "Sending..." : "Send Message"}
-            </Button>
-            {status !== "idle" && (
-              <div
-                className={`flex items-center gap-2 rounded-2xl border px-4 py-3 text-sm ${
-                  status === "success"
-                    ? "border-accent-cyan/40 text-accent-cyan"
-                    : status === "loading"
-                    ? "border-white/20 text-white/80"
-                    : "border-[#ff4d6d]/60 text-[#ff4d6d]"
-                }`}
+          <Card className="backdrop-blur-sm bg-white/5 border-white/10 p-8 sm:p-12 text-center">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Mail className="h-16 w-16 sm:h-20 sm:w-20 mx-auto mb-6 text-accent-cyan" />
+              <h3 className="font-display text-2xl sm:text-3xl text-white mb-4">Ready to start a project?</h3>
+              <p className="text-white/70 mb-8 max-w-md mx-auto">
+                Click below to send me an email directly. I&apos;ll get back to you as soon as possible.
+              </p>
+              <a
+                href="mailto:omerfarukasik54@gmail.com?subject=Project%20Inquiry&body=Hi%20Omer,%0A%0A"
+                className="inline-flex items-center gap-3 rounded-full border-2 border-accent-cyan bg-accent-cyan/10 px-8 py-4 text-lg font-semibold text-accent-cyan transition-all hover:bg-accent-cyan hover:text-white hover:shadow-[0_0_30px_rgba(45,212,191,0.5)]"
               >
-                {status === "success" ? (
-                  <CheckCircle2 className="h-5 w-5" />
-                ) : status === "loading" ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                ) : (
-                  <AlertCircle className="h-5 w-5" />
-                )}
-                {status === "success"
-                  ? "Thanks! I will reply shortly."
-                  : status === "loading"
-                  ? "Sending your message..."
-                  : status === "validation-error"
-                  ? "Please fix the highlighted fields and try again."
-                  : "Something went wrong. Please try again later."}
-              </div>
-            )}
-          </form>
-        </Card>
+                <Mail className="h-5 w-5" />
+                <span>Send a Mail</span>
+              </a>
+            </motion.div>
+          </Card>
         </motion.div>
       </div>
     </motion.section>

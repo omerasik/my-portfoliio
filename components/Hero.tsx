@@ -31,12 +31,10 @@ export default function Hero() {
           </div>
           <div>
             <h1 className="font-display text-3xl leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">Omer Asik</h1>
-            <p className="mt-2 text-sm text-white/60">Based in Belgium</p>
+            <p className="mt-2 text-sm text-white/60">Based in Ghent, Belgium</p>
           </div>
           <p className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg">
-            I build clean and scalable web applications, and I enjoy turning real problems into simple solutions. I&apos;m curious about
-            automation, data, and practical AI tools that make development smarter and faster. Most of all, I focus on being reliable
-            and always improving as a full-stack developer.
+            I develop modern and scalable web applications, and I enjoy turning complex problems into simple, useful solutions. I focus on automation, data, and practical AI tools to make processes faster and smarter. I&apos;m reliable, consistent, and always improving as a full-stack developer.
           </p>
           <p className="text-sm text-white/60">Fueled by curiosity and good coffee ☕</p>
           <div className="flex flex-wrap gap-4">
