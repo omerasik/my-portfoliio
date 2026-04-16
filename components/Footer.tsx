@@ -1,44 +1,49 @@
-﻿"use client";
+"use client";
 
-import { Github, Linkedin, MoveUpRight } from "lucide-react";
-import type { ReactNode } from "react";
-import IconButton from "@/components/ui/IconButton";
-import Logo from "@/components/ui/Logo";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { socialLinks } from "@/lib/data";
+import type { ReactNode } from "react";
 
-const icons: Record<"Github" | "Linkedin", ReactNode> = {
-  Github: <Github className="h-5 w-5" />,
-  Linkedin: <Linkedin className="h-5 w-5" />
+const ICONS: Record<string, ReactNode> = {
+  Github:   <Github className="h-4 w-4" />,
+  Linkedin: <Linkedin className="h-4 w-4" />,
+  Mail:     <Mail className="h-4 w-4" />,
 };
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 py-6 text-sm text-white/70">
-      <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <a href="#hero" className="flex items-center group transition-transform duration-300 hover:scale-105">
-            <Logo className="w-14 h-14 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(45,212,191,0.5)]" />
+    <footer className="relative border-t border-accent-violet/10 py-10">
+      {/* Top glow line */}
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-accent-violet/40 to-transparent" />
+
+      <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+        {/* Left: brand */}
+        <div>
+          <a href="#hero" className="font-display text-2xl font-black text-ink">
+            OA<span className="text-accent-lime" style={{ textShadow: "0 0 12px rgba(204,255,0,0.7)" }}>.</span>
           </a>
-          <p className="text-white/70">Designed & developed by Omer Asik. All rights reserved.</p>
+          <p className="mt-1 font-mono text-xs text-ink/30">Designed & built by Omer Faruk Asik © 2025</p>
         </div>
+
+        {/* Right: socials + scroll to top */}
         <div className="flex items-center gap-3">
-          {socialLinks.map((link) => (
-            <IconButton key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" label={link.label}>
-              {link.icon === "Mail" ? (
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              ) : (
-                icons[link.icon as keyof typeof icons]
-              )}
-            </IconButton>
+          {socialLinks.map(l => (
+            <a
+              key={l.label}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={l.label}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/8 bg-surface/60 text-ink/45 transition-all hover:border-accent-violet/40 hover:bg-accent-violet/10 hover:text-accent-violet"
+            >
+              {ICONS[l.icon]}
+            </a>
           ))}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-white transition hover:border-accent-cyan hover:text-accent-cyan"
+            className="ml-2 rounded-lg border border-accent-violet/25 bg-accent-violet/8 px-4 py-2 font-mono text-xs text-accent-violet transition-all hover:bg-accent-violet hover:text-white"
           >
-            Back to top
-            <MoveUpRight className="h-4 w-4" />
+            ↑ Top
           </button>
         </div>
       </div>

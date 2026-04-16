@@ -1,204 +1,130 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navItems } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import Button from "@/components/ui/Button";
-import Logo from "@/components/ui/Logo";
 
 export default function Navbar() {
-  const [active, setActive] = useState<string>(navItems[0]?.href.replace("#", "") ?? "hero");
+  const [active, setActive] = useState(navItems[0]?.href.replace("#", "") ?? "hero");
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.3 }
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => e.isIntersecting && setActive(e.target.id)),
+      { threshold: 0.25 }
     );
-
     navItems.forEach(({ href }) => {
-      const id = href.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
+      const el = document.getElementById(href.replace("#", ""));
+      if (el) obs.observe(el);
     });
-
-    return () => observer.disconnect();
+    return () => obs.disconnect();
   }, []);
-
-  const handleMobileNavClick = (href: string) => {
-    setMobileMenuOpen(false);
-  };
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
-        scrolled 
-          ? "bg-gradient-to-b from-onyx/95 via-charcoal/90 to-onyx/95 backdrop-blur-2xl shadow-2xl shadow-accent-pink/10" 
-          : "bg-transparent"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center justify-between">
-          <motion.a 
-            href="#hero" 
-            className="flex items-center group"
+    <header className={cn(
+      "fixed left-0 right-0 top-0 z-[100] transition-all duration-500",
+      scrolled
+        ? "border-b border-accent-violet/10 bg-void/70 backdrop-blur-2xl"
+        : "bg-transparent"
+    )}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-12">
+        {/* Logo */}
+        <a href="#hero">
+          <motion.span
+            className="font-display text-xl font-black tracking-tight text-ink"
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
-            <Logo className="w-12 h-12 transition-all duration-300 group-hover:scale-110" />
-          </motion.a>
-          
-          <nav className="flex items-center space-x-8">
-            {navItems.map((item, index) => (
+            OA
+            <span className="text-accent-lime" style={{ textShadow: "0 0 15px rgba(204,255,0,0.7)" }}>.</span>
+          </motion.span>
+        </a>
+
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-8 md:flex">
+          {navItems.map((item, i) => {
+            const isActive = active === item.href.replace("#", "");
+            return (
               <motion.a
                 key={item.href}
                 href={item.href}
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: i * 0.07 }}
                 className={cn(
-                  "relative text-sm font-medium transition-all duration-300 hover:text-white group",
-                  active === item.href.replace("#", "") 
-                    ? "text-white" 
-                    : "text-white/60"
+                  "relative font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-300",
+                  isActive ? "text-ink" : "text-ink/45 hover:text-ink/80"
                 )}
               >
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-dot"
+                    className="absolute -top-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-accent-lime"
+                    style={{ boxShadow: "0 0 8px #CCFF00" }}
+                  />
+                )}
                 {item.label}
-                <span className={cn(
-                  "absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-accent-pink to-accent-cyan transition-all duration-300",
-                  active === item.href.replace("#", "")
-                    ? "w-full"
-                    : "w-0 group-hover:w-full"
-                )} />
               </motion.a>
-            ))}
-          </nav>
-        </div>
-        
-        {/* Mobile Navigation */}
-        <div className="flex md:hidden items-center justify-between">
-          <a href="#hero" className="flex items-center">
-            <Logo className="w-10 h-10 transition-all duration-300 hover:scale-110" />
-          </a>
-          
-          {/* Hamburger Menu Button */}
-          <motion.button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="relative z-50 p-2 text-white/80 hover:text-white transition-colors"
-            whileTap={{ scale: 0.95 }}
+            );
+          })}
+          <a
+            href="#contact"
+            className="rounded-full border border-accent-violet/50 bg-accent-violet/10 px-5 py-2 font-mono text-xs uppercase tracking-widest text-accent-violet transition-all hover:bg-accent-violet hover:text-white"
           >
-            <AnimatePresence mode="wait">
-              {mobileMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="h-6 w-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="h-6 w-6" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
-        </div>
+            Hire Me
+          </a>
+        </nav>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-ink/60 md:hidden"
+        >
+          <AnimatePresence mode="wait">
+            {open
+              ? <motion.div key="x" initial={{ rotate: -90 }} animate={{ rotate: 0 }} exit={{ rotate: 90 }}><X className="h-5 w-5" /></motion.div>
+              : <motion.div key="m" initial={{ rotate: 90 }}  animate={{ rotate: 0 }} exit={{ rotate: -90 }}><Menu className="h-5 w-5" /></motion.div>
+            }
+          </AnimatePresence>
+        </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile menu */}
       <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            
-            {/* Menu Panel */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 bottom-0 w-[280px] bg-gradient-to-b from-charcoal/95 to-onyx/95 backdrop-blur-xl border-l border-white/10 shadow-2xl z-50 md:hidden"
-            >
-              <div className="flex flex-col h-full pt-20 px-6 pb-8">
-                {/* Navigation Links */}
-                <nav className="flex-1 space-y-2">
-                  {navItems.map((item, index) => (
-                    <motion.a
-                      key={item.href}
-                      href={item.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      onClick={() => handleMobileNavClick(item.href)}
-                      className={cn(
-                        "block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300",
-                        active === item.href.replace("#", "")
-                          ? "text-white bg-gradient-to-r from-accent-pink/20 to-accent-cyan/20 border border-accent-cyan/30"
-                          : "text-white/70 hover:text-white hover:bg-white/5"
-                      )}
-                    >
-                      <span className="flex items-center gap-3">
-                        <span className={cn(
-                          "w-1.5 h-1.5 rounded-full transition-all duration-300",
-                          active === item.href.replace("#", "")
-                            ? "bg-accent-cyan"
-                            : "bg-white/30"
-                        )} />
-                        {item.label}
-                      </span>
-                    </motion.a>
-                  ))}
-                </nav>
-
-                {/* Footer Info */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="pt-6 border-t border-white/10"
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="overflow-hidden border-t border-accent-violet/10 bg-void/90 backdrop-blur-xl md:hidden"
+          >
+            <div className="space-y-1 px-5 py-6">
+              {navItems.map(item => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "block rounded-lg px-4 py-3 font-mono text-sm uppercase tracking-widest transition-colors",
+                    active === item.href.replace("#", "")
+                      ? "bg-accent-violet/15 text-ink"
+                      : "text-ink/50 hover:text-ink"
+                  )}
                 >
-                  <p className="text-xs text-white/40 text-center">
-                    © 2024 Omer Faruk Asik
-                  </p>
-                </motion.div>
-              </div>
-            </motion.div>
-          </>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>

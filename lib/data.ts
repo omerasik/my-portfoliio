@@ -49,6 +49,7 @@ export type Project = {
   links: ProjectLink[];
   features?: string[];
   image?: string;
+  images?: string[];
 };
 
 export type ContactDetail = {
@@ -214,6 +215,47 @@ export const services: Service[] = [
 export const projects: Project[] = [
   {
     category: "FULL-STACK",
+    title: "School Tracking Platform",
+    description: "Student dossier management system. Manage student records, registrations, coaches and notes with a Next.js frontend and Strapi CMS backend. Features PDF export and role-based access.",
+    stack: ["Next.js", "Strapi 5", "React 19", "jsPDF", "Tailwind CSS"],
+    image: "/images/student_tracking.png",
+    links: [
+      { label: "View on GitHub", href: "https://github.com/omerasik/school_tracking_platform", icon: "Github", variant: "primary" }
+    ]
+  },
+  {
+    category: "MOBILE APP",
+    title: "OA Code Quiz",
+    description: "A modern Expo and Supabase mobile quiz app for programming students, featuring role-based dashboards, progress tracking, and interactive code-focused quizzes.",
+    stack: ["Expo", "React Native", "TypeScript", "Supabase", "TanStack Query"],
+    images: [
+      "/images/oa_quiz_app.png",
+      "/images/oa_quiz_app2.png",
+      "/images/oa_quiz_app3.png"
+    ],
+    links: [
+      { label: "View on GitHub", href: "https://github.com/omerasik/oa-code-quiz", icon: "Github", variant: "primary" }
+    ],
+    features: [
+      "Role-based experience for students and teachers",
+      "Interactive quizzes with timer, scoring, and badges",
+      "Progress tracking, leaderboard, and profile management",
+      "Teacher overview with searchable student results"
+    ]
+  },
+  {
+    category: "MOBILE APP — CURRENT PROJECT",
+    title: "QR Student Attendance App (In Progress)",
+    description: "Mobile scanner & presence tracker with QR code scanning, campus location logging, and role-based actions.",
+    stack: ["React Native", "Expo", "Supabase", "Haptics API", "Location API"],
+    image: "/images/attendance.png",
+    links: [
+      { label: "In Development", variant: "muted" },
+      { label: "View on GitHub", href: "https://github.com/omerasik/pgm-qr-attendance", icon: "Github", variant: "secondary" }
+    ]
+  },
+  {
+    category: "FULL-STACK",
     title: "The Grand Library",
     description: "Book discovery platform for Artevelde students with wishlist, ratings, role-based borrowing and staff management.",
     stack: ["Next.js 15", "TypeScript", "Prisma", "NextAuth", "SQLite"],
@@ -261,7 +303,7 @@ export const projects: Project[] = [
   },
   {
     category: "FRONTEND",
-    title: "Gamescom 2024",
+    title: "Gamescom 2025",
     description: "Interactive gaming information website showcasing current games, industry trends, and insights about the future of gaming. Built with modern vanilla JavaScript and fully responsive design.",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript"],
     image: "/images/gamescom.png",
@@ -301,28 +343,6 @@ export const projects: Project[] = [
     image: "/images/to_do_app.png",
     links: [
       { label: "View on GitHub", href: "https://github.com/omerasik/to-do-make-it-happen-", icon: "Github", variant: "primary" }
-    ]
-  },
-  {
-    category: "FULL-STACK",
-    title: "Student Tracking System (In Progress)",
-    description: "Scheduling and student presence management app for teachers with secure roles, dashboard and analytics.",
-    stack: ["Next.js", "Strapi", "PostgreSQL", "JWT Auth"],
-    image: "/images/student_tracking.png",
-    links: [
-      { label: "In Development", variant: "muted" },
-      { label: "View on GitHub", href: "https://github.com/omerasik/student-tracking-system", icon: "Github", variant: "secondary" }
-    ]
-  },
-  {
-    category: "MOBILE APP — CURRENT PROJECT",
-    title: "QR Student Attendance App (In Progress)",
-    description: "Mobile scanner & presence tracker with QR code scanning, campus location logging, and role-based actions.",
-    stack: ["React Native", "Expo", "Supabase", "Haptics API", "Location API"],
-    image: "/images/attendance.png",
-    links: [
-      { label: "In Development", variant: "muted" },
-      { label: "View on GitHub", href: "https://github.com/omerasik/pgm-qr-attendance", icon: "Github", variant: "secondary" }
     ]
   }
 ];

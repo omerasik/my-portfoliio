@@ -1,48 +1,57 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 
-const particles = Array.from({ length: 8 }).map((_, index) => ({
-  id: index,
-  size: 160 + index * 25,
-  delay: index * 0.4,
-  gradient:
-    index % 2 === 0
-      ? "from-[rgba(77,233,255,0.25)] via-transparent to-transparent"
-      : "from-[rgba(255,114,210,0.25)] via-transparent to-transparent"
+const orbs = [
+  { x: "10%",  y: "15%", size: 400, color: "rgba(109,40,217,0.18)",  dur: 22 },
+  { x: "75%",  y: "5%",  size: 320, color: "rgba(204,255,0,0.07)",   dur: 18 },
+  { x: "60%",  y: "65%", size: 360, color: "rgba(139,92,246,0.12)",  dur: 26 },
+  { x: "5%",   y: "70%", size: 280, color: "rgba(0,212,170,0.07)",   dur: 30 },
+];
+
+const dots = Array.from({ length: 45 }, (_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  r: 0.8 + Math.random() * 1.8,
+  dur: 2.5 + Math.random() * 5,
+  delay: Math.random() * 6,
+  color: i % 4 === 0 ? "#CCFF00" : i % 4 === 1 ? "#8B5CF6" : i % 4 === 2 ? "#00D4AA" : "rgba(255,255,255,0.5)"
 }));
 
 export default function FloatingParticles() {
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {particles.map((particle) => (
-        <motion.span
-          key={particle.id}
-          aria-hidden
-          className={`absolute rounded-full blur-3xl bg-gradient-to-br ${particle.gradient}`}
-          style={{
-            width: particle.size,
-            height: particle.size,
-            top: `${5 + particle.id * 10}%`,
-            left: `${(particle.id * 13) % 90}%`
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{
-            opacity: [0.25, 0.55, 0.35],
-            y: [0, -20, 10],
-            x: [0, 10, -10],
-            scale: [0.9, 1.05, 0.95]
-          }}
-          transition={{
-            duration: 18 + particle.id * 1.5,
-            repeat: Infinity,
-            repeatType: "mirror",
-            delay: particle.delay,
-            ease: "easeInOut"
-          }}
+      {/* Ambient orbs */}
+      {orbs.map((o, i) => (
+        <motion.div
+          key={i} aria-hidden
+          className="absolute rounded-full blur-[80px]"
+          style={{ width: o.size, height: o.size, left: o.x, top: o.y, background: o.color }}
+          animate={{ x: [0, 30, -20, 0], y: [0, -25, 20, 0], scale: [1, 1.08, 0.95, 1] }}
+          transition={{ duration: o.dur, repeat: Infinity, ease: "easeInOut" }}
         />
       ))}
+
+      {/* Twinkling micro-particles */}
+      {dots.map(d => (
+        <motion.div
+          key={d.id} aria-hidden
+          className="absolute rounded-full"
+          style={{ width: d.r * 2, height: d.r * 2, left: `${d.x}%`, top: `${d.y}%`, background: d.color,
+            boxShadow: `0 0 ${d.r * 4}px ${d.color}` }}
+          animate={{ opacity: [0, 0.9, 0], scale: [0.4, 1.3, 0.4] }}
+          transition={{ duration: d.dur, delay: d.delay, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
+
+      {/* Horizontal scan */}
+      <motion.div aria-hidden
+        className="absolute left-0 right-0 h-px opacity-15"
+        style={{ background: "linear-gradient(90deg, transparent, #8B5CF6 30%, #CCFF00 70%, transparent)" }}
+        animate={{ top: ["0%", "100%"] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      />
     </div>
   );
 }
-
