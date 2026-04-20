@@ -12,9 +12,9 @@ const ICONS: Record<string, ReactNode> = {
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-accent-violet/10 py-10">
-      {/* Top glow line */}
-      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-accent-violet/40 to-transparent" />
+    <footer className="relative py-10">
+      {/* Glow separator line */}
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-accent-violet/35 to-transparent" />
 
       <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
         {/* Left: brand */}

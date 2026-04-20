@@ -34,7 +34,7 @@ export default function Navbar() {
     <header className={cn(
       "fixed left-0 right-0 top-0 z-[100] transition-all duration-500",
       scrolled
-        ? "border-b border-accent-violet/10 bg-void/70 backdrop-blur-2xl"
+        ? "bg-void/85 backdrop-blur-2xl shadow-[0_1px_0_0_rgba(139,92,246,0.12)]"
         : "bg-transparent"
     )}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-12">

@@ -29,9 +29,14 @@ function ProjectCard({ project, onClick, index }: { project: Project; onClick: (
       className={`group relative cursor-pointer overflow-hidden rounded-2xl border border-white/6 bg-surface/60 backdrop-blur-sm transition-all duration-300 hover:border-white/14 hover:shadow-card-hover ${isFeature ? "sm:col-span-2" : ""}`}
     >
       {/* Image */}
-      <div className={`relative overflow-hidden bg-deep ${isFeature ? "h-52 sm:h-64" : "h-40"}`}>
+      <div className={`relative overflow-hidden bg-deep ${isFeature ? "h-52 sm:h-64" : "h-44"}`}>
+        {/* Top border sweep on hover */}
+        <div
+          className="absolute left-0 right-0 top-0 h-[2px] origin-left scale-x-0 z-10 transition-transform duration-500 group-hover:scale-x-100"
+          style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}
+        />
         {project.images && project.images.length > 0 ? (
-          <div className="absolute inset-0 flex items-center justify-center gap-2 sm:gap-6 p-4">
+          <div className="absolute inset-0 flex items-center justify-center gap-2 sm:gap-4 p-4">
              {project.images.map((img, idx) => (
                 <div key={idx} className="relative h-full flex-1 w-full">
                   <Image
@@ -50,14 +55,14 @@ function ProjectCard({ project, onClick, index }: { project: Project; onClick: (
             alt={project.title}
             fill
             priority={index < 3}
-            className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="font-display text-6xl font-black text-white/5">{project.title[0]}</span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-surface/90 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-surface/90 via-surface/20 to-transparent" />
         {/* Category tag */}
         <div className="absolute left-4 top-4">
           <span
@@ -68,7 +73,7 @@ function ProjectCard({ project, onClick, index }: { project: Project; onClick: (
           </span>
         </div>
         {/* Arrow hint */}
-        <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/8 opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+        <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-white/8 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:scale-110">
           <ArrowUpRight className="h-4 w-4 text-white" />
         </div>
       </div>

@@ -77,23 +77,25 @@ export default function Skills() {
                     key={s.name}
                     initial={{ opacity: 0, scale: 0.85 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    whileHover={{ scale: 1.06, y: -3 }}
+                    whileHover={{ scale: 1.08, y: -4, boxShadow: `0 8px 25px -8px ${s.brandColor}40` }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.04 }}
-                    className="group relative flex items-center gap-2.5 overflow-hidden rounded-xl border border-white/6 bg-surface/50 px-4 py-2.5 backdrop-blur-sm transition-all duration-200 hover:border-white/12"
+                    className="group relative flex items-center gap-2.5 overflow-hidden rounded-xl border border-white/6 bg-surface/50 px-4 py-2.5 backdrop-blur-sm transition-colors duration-200 hover:border-white/14"
                   >
-                    {/* Glow on hover using brand color */}
+                    {/* Brand color glow layer */}
                     <div
                       className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      style={{ background: `radial-gradient(circle at 30% 50%, ${s.brandColor}15, transparent 60%)` }}
+                      style={{ background: `radial-gradient(circle at 30% 50%, ${s.brandColor}20, transparent 65%)` }}
                     />
-                    <Image src={s.asset} alt={s.name} width={18} height={18} className="h-[18px] w-[18px] flex-shrink-0 object-contain transition-transform duration-200 group-hover:scale-110" />
-                    <span className="relative font-mono text-xs text-ink/70 transition-colors group-hover:text-ink/90 whitespace-nowrap">
+                    {/* Bottom accent bar */}
+                    <div
+                      className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-0 rounded-full transition-all duration-500 group-hover:w-full"
+                      style={{ background: `linear-gradient(90deg, ${s.brandColor}, transparent)` }}
+                    />
+                    <Image src={s.asset} alt={s.name} width={18} height={18} className="h-[18px] w-[18px] flex-shrink-0 object-contain transition-transform duration-200 group-hover:scale-125" />
+                    <span className="relative font-mono text-xs text-ink/70 transition-colors group-hover:text-ink/95 whitespace-nowrap">
                       {s.name}
                     </span>
-                    {/* Color dot */}
-                    <span className="absolute right-2 top-1/2 h-1 w-1 -translate-y-1/2 rounded-full opacity-0 transition-opacity group-hover:opacity-100"
-                      style={{ backgroundColor: s.brandColor }} />
                   </motion.div>
                 ))}
               </div>
