@@ -61,17 +61,17 @@ export default function Hero3D() {
       tw: Math.random() * Math.PI * 2
     }));
 
-    let cCy = readVar("--cy");
-    let cVi = readVar("--vi");
-    let cMg = readVar("--mg");
+    let cCy = readVar("--a1");
+    let cVi = readVar("--a2");
+    let cMg = readVar("--a3");
     let glowStrength = parseFloat(
       getComputedStyle(document.documentElement).getPropertyValue("--glow-strength")
     ) || 1;
 
     const themeObserver = new MutationObserver(() => {
-      cCy = readVar("--cy");
-      cVi = readVar("--vi");
-      cMg = readVar("--mg");
+      cCy = readVar("--a1");
+      cVi = readVar("--a2");
+      cMg = readVar("--a3");
       glowStrength = parseFloat(
         getComputedStyle(document.documentElement).getPropertyValue("--glow-strength")
       ) || 1;

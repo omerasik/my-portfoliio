@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import type { ReactNode } from "react";
+import type { MouseEvent as ReactMouseEvent, ReactNode } from "react";
 
 type Props = {
   href: string;
@@ -13,7 +13,7 @@ type Props = {
 export default function MagneticButton({ href, children, variant = "primary", external }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
 
-  const onMove = (e: React.MouseEvent) => {
+  const onMove = (e: ReactMouseEvent) => {
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -28,12 +28,12 @@ export default function MagneticButton({ href, children, variant = "primary", ex
   };
 
   const base =
-    "group relative inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold text-sm transition-all duration-300 will-change-transform";
+    "btn-chamfer group relative inline-flex items-center gap-2 px-7 py-3.5 font-mono text-sm font-semibold uppercase tracking-wider will-change-transform";
 
   const styles =
     variant === "primary"
-      ? "text-bg bg-gradient-to-r from-cy via-vi to-mg bg-[length:200%_100%] bg-left hover:bg-right shadow-glow-vi hover:shadow-glow-mg"
-      : "text-ink border border-edge/30 bg-card/40 backdrop-blur hover:border-cy/60 hover:shadow-glow-cy";
+      ? "text-bg bg-gradient-to-r from-a1 to-a2 hover:shadow-glow-a1"
+      : "text-ink border border-edge/30 bg-card/40 backdrop-blur hover:border-a1/60 hover:text-a1";
 
   return (
     <a
@@ -44,7 +44,7 @@ export default function MagneticButton({ href, children, variant = "primary", ex
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
       className={`${base} ${styles}`}
-      style={{ transition: "transform 0.25s cubic-bezier(0.23,1,0.32,1), box-shadow 0.3s, background-position 0.5s, border-color 0.3s" }}
+      style={{ transition: "transform 0.25s cubic-bezier(0.23,1,0.32,1), box-shadow 0.3s, border-color 0.3s, color 0.3s" }}
     >
       {children}
     </a>

@@ -26,20 +26,20 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label="Toggle theme"
-      className="group relative flex h-10 w-10 items-center justify-center rounded-full border border-edge/20 bg-card/50 backdrop-blur transition-all duration-300 hover:border-cy/50 hover:shadow-glow-cy"
+      className="btn-chamfer flex h-10 w-10 items-center justify-center border border-edge/25 bg-card/50 backdrop-blur transition-colors duration-300 hover:border-a1/50"
     >
-      <span className="relative h-[18px] w-[18px]">
+      <span className="relative h-[16px] w-[16px]">
         {mounted && (
           <>
             <Sun
-              size={18}
-              className={`absolute inset-0 text-cy transition-all duration-500 ${
+              size={16}
+              className={`absolute inset-0 text-a3 transition-all duration-500 ${
                 theme === "light" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"
               }`}
             />
             <Moon
-              size={18}
-              className={`absolute inset-0 text-vi transition-all duration-500 ${
+              size={16}
+              className={`absolute inset-0 text-a2 transition-all duration-500 ${
                 theme === "dark" ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-0 opacity-0"
               }`}
             />

@@ -17,11 +17,11 @@ export default function SectionHeader({ index, eyebrow, title, description }: Pr
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
-        className="flex items-center gap-3"
+        className="flex items-center gap-3 font-mono"
       >
-        <span className="font-mono text-sm font-bold text-mg">{index}</span>
-        <span className="h-px w-12 bg-gradient-to-r from-mg to-transparent" />
-        <span className="font-mono text-xs uppercase tracking-[0.3em] text-dim">{eyebrow}</span>
+        <span className="text-sm font-bold text-a1">[{index}]</span>
+        <span className="h-px w-12 bg-gradient-to-r from-a1 to-transparent" />
+        <span className="text-xs uppercase tracking-[0.3em] text-dim">{eyebrow}</span>
       </motion.div>
 
       <motion.h2

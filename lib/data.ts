@@ -1,5 +1,7 @@
+export type NavKey = "home" | "about" | "experience" | "skills" | "services" | "projects" | "contact";
+
 export type NavItem = {
-  label: string;
+  key: NavKey;
   href: `#${string}`;
 };
 
@@ -7,41 +9,6 @@ export type SocialLink = {
   label: string;
   href: string;
   icon: "Github" | "Linkedin" | "Mail";
-};
-
-export type Stat = {
-  label: string;
-  value: string;
-};
-
-export type EducationItem = {
-  school: string;
-  program: string;
-  period: string;
-  description: string;
-};
-
-export type SkillCard = {
-  name: string;
-  category: "Frontend" | "Backend" | "Automation & AI" | "Tools";
-  description: string;
-  icon: string;
-};
-
-export type ExperienceItem = {
-  company: string;
-  role: string;
-  period: string;
-  location: string;
-  description: string;
-  highlights: string[];
-  tags: string[];
-};
-
-export type Service = {
-  title: string;
-  description: string;
-  icon: string;
 };
 
 export type ProjectLink = {
@@ -70,13 +37,13 @@ export type ContactDetail = {
 };
 
 export const navItems: NavItem[] = [
-  { label: "Home", href: "#hero" },
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" }
+  { key: "home", href: "#hero" },
+  { key: "about", href: "#about" },
+  { key: "experience", href: "#experience" },
+  { key: "skills", href: "#skills" },
+  { key: "services", href: "#services" },
+  { key: "projects", href: "#projects" },
+  { key: "contact", href: "#contact" }
 ];
 
 export const socialLinks: SocialLink[] = [
@@ -85,17 +52,14 @@ export const socialLinks: SocialLink[] = [
   { label: "Email", href: "mailto:omerfarukasik54@gmail.com", icon: "Mail" }
 ];
 
-export const heroStats: Stat[] = [
-  { label: "Focus", value: "Full-Stack · Automation · AI" },
-  { label: "Location", value: "Ghent, Belgium" },
-  { label: "Status", value: "Open to junior roles" }
-];
+export const languages = ["English", "Dutch", "Turkish"] as const;
 
-export const heroRoles = [
-  "Full-Stack Developer",
-  "Automation Engineer",
-  "AI Agent Builder",
-  "Power Platform Developer"
+/* Skill cloud for the 3D sphere */
+export const skillCloud = [
+  "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "PHP",
+  "Laravel", "MySQL", "Supabase", "React Native", "Expo", "Tailwind CSS",
+  "Docker", "Git", "Business Central", "AL", "Power Apps", "Power Automate",
+  "Azure DevOps", "AI Agents", "Craft CMS", "REST APIs", "CI/CD", "Prisma"
 ];
 
 export const techMarquee = [
@@ -104,191 +68,12 @@ export const techMarquee = [
   "Laravel", "Docker", "MySQL", "React Native", "Tailwind CSS"
 ];
 
-export const experience: ExperienceItem[] = [
-  {
-    company: "Astena",
-    role: "Software Developer Intern",
-    period: "2026 · Internship",
-    location: "Belgium",
-    description:
-      "Internship at Astena, a Microsoft solutions partner, working on business automation and AI inside the Microsoft ecosystem.",
-    highlights: [
-      "Developed extensions in Microsoft Dynamics 365 Business Central using AL",
-      "Built Power Apps solutions and automated business workflows with Power Automate",
-      "Managed Power Platform solutions and deployment pipelines with Azure DevOps",
-      "Built an AI Mail Agent that automates the processing of incoming customer emails"
-    ],
-    tags: ["Business Central", "AL", "Power Apps", "Power Automate", "Azure DevOps", "AI Agents"]
-  }
-];
-
-export const languages = ["English", "Dutch", "Turkish"] as const;
-
-export const education: EducationItem[] = [
-  {
-    school: "Artevelde University",
-    program: "Programming",
-    period: "2024 - 2026",
-    description: "Building a rock-solid full-stack foundation through modern web, infrastructure, and collaboration projects."
-  },
-  {
-    school: "CVO Gent",
-    program: "ICT",
-    period: "2023 - 2024",
-    description: "Hands-on labs in networking, scripting, and automation basics with a focus on practical troubleshooting."
-  },
-  {
-    school: "Nieuwen Bosch Humaniora",
-    program: "Science & Mathematics",
-    period: "2019 - 2023",
-    description: "STEM-intensive secondary education that sharpened analytical thinking and problem solving."
-  }
-];
-
-export const technicalSkills: SkillCard[] = [
-  {
-    name: "JavaScript",
-    category: "Frontend",
-    description: "Modern ES standards, modular patterns, and tooling.",
-    icon: "Code"
-  },
-  {
-    name: "React.js",
-    category: "Frontend",
-    description: "Component-driven UI with hooks, context, and motion.",
-    icon: "Atom"
-  },
-  {
-    name: "HTML5",
-    category: "Frontend",
-    description: "Semantic layouts with accessibility baked in.",
-    icon: "Layout"
-  },
-  {
-    name: "CSS3",
-    category: "Frontend",
-    description: "Responsive design systems using Tailwind and custom tokens.",
-    icon: "Palette"
-  },
-  {
-    name: "Node.js",
-    category: "Backend",
-    description: "REST APIs, utilities, and integration services.",
-    icon: "Server"
-  },
-  {
-    name: "PHP",
-    category: "Backend",
-    description: "Simple server-side logic and CMS integrations.",
-    icon: "Braces"
-  },
-  {
-    name: "MySQL",
-    category: "Backend",
-    description: "Schema design, relationships, and query optimization.",
-    icon: "Database"
-  },
-  {
-    name: "Business Central · AL",
-    category: "Automation & AI",
-    description: "Custom extensions and business logic in Dynamics 365 Business Central.",
-    icon: "Building2"
-  },
-  {
-    name: "Power Apps",
-    category: "Automation & AI",
-    description: "Low-code business apps connected to live company data.",
-    icon: "AppWindow"
-  },
-  {
-    name: "Power Automate",
-    category: "Automation & AI",
-    description: "Automated workflows that remove repetitive manual work.",
-    icon: "Workflow"
-  },
-  {
-    name: "Azure DevOps",
-    category: "Automation & AI",
-    description: "Solution management, repos, and deployment pipelines.",
-    icon: "Infinity"
-  },
-  {
-    name: "AI Agents & LLMs",
-    category: "Automation & AI",
-    description: "AI-powered agents that read, classify, and act on real data.",
-    icon: "Bot"
-  },
-  {
-    name: "Docker",
-    category: "Tools",
-    description: "Containerized dev environments and deployment scripts.",
-    icon: "Box"
-  },
-  {
-    name: "Craft CMS",
-    category: "Tools",
-    description: "Custom content models and data-driven pages.",
-    icon: "Blocks"
-  },
-  {
-    name: "Git & GitHub",
-    category: "Tools",
-    description: "Team workflows, reviews, and basic CI/CD.",
-    icon: "GitBranch"
-  }
-];
-
-export const softSkills = [
-  "Teamwork",
-  "Curiosity",
-  "Time management",
-  "Flexibility",
-  "Communication",
-  "Customer focus",
-  "Creativity",
-  "Accuracy",
-  "Reliability"
-];
-
-export const services: Service[] = [
-  {
-    title: "Web Application Development",
-    description: "Responsive full-stack applications with clean UI, reusable components, and maintainable codebases.",
-    icon: "AppWindow"
-  },
-  {
-    title: "Front-End Development",
-    description: "Modern interfaces in React with motion, accessibility, and thoughtful typography.",
-    icon: "MonitorSmartphone"
-  },
-  {
-    title: "Back-End & API Development",
-    description: "Designing REST APIs, authentication flows, and simple services with Node.js and PHP.",
-    icon: "ServerCog"
-  },
-  {
-    title: "Database & Data Structures",
-    description: "Structuring relational schemas, writing queries, and keeping data consistent and secure.",
-    icon: "Database"
-  },
-  {
-    title: "Automation & Integrations",
-    description: "Connecting APIs, webhooks, and lightweight automation to make products smarter.",
-    icon: "Workflow"
-  },
-  {
-    title: "Consulting & Collaboration",
-    description: "Working with designers, developers, and stakeholders to turn ideas into testable prototypes.",
-    icon: "Users"
-  }
-];
-
 export const projects: Project[] = [
   {
-    category: "AI · AUTOMATION — ASTENA INTERNSHIP",
+    category: "AI · AUTOMATION · ASTENA INTERNSHIP",
     title: "AI Mail Agent",
     description:
-      "An intelligent mail agent built during my internship at Astena. It automatically reads incoming customer emails, classifies them with AI, extracts the relevant data, and triggers the right business workflow — turning a manual inbox process into a hands-free pipeline integrated with the Microsoft ecosystem.",
+      "An intelligent mail agent built during my internship at Astena. It automatically reads incoming customer emails, classifies them with AI, extracts the relevant data and triggers the right business workflow, turning a manual inbox process into a hands-free pipeline integrated with the Microsoft ecosystem.",
     stack: ["AI / LLM", "Power Automate", "Power Apps", "Business Central", "Azure DevOps"],
     links: [
       { label: "Built at Astena · Private codebase", variant: "muted" }
@@ -313,7 +98,7 @@ export const projects: Project[] = [
   {
     category: "MOBILE APP",
     title: "OA Code Quiz",
-    description: "A modern Expo and Supabase mobile quiz app for programming students, featuring role-based dashboards, progress tracking, and interactive code-focused quizzes.",
+    description: "A modern Expo and Supabase mobile quiz app for programming students, featuring role-based dashboards, progress tracking and interactive code-focused quizzes.",
     stack: ["Expo", "React Native", "TypeScript", "Supabase", "TanStack Query"],
     images: [
       "/images/oa_quiz_app.png",
@@ -325,15 +110,15 @@ export const projects: Project[] = [
     ],
     features: [
       "Role-based experience for students and teachers",
-      "Interactive quizzes with timer, scoring, and badges",
-      "Progress tracking, leaderboard, and profile management",
+      "Interactive quizzes with timer, scoring and badges",
+      "Progress tracking, leaderboard and profile management",
       "Teacher overview with searchable student results"
     ]
   },
   {
-    category: "MOBILE APP — CURRENT PROJECT",
-    title: "QR Student Attendance App (In Progress)",
-    description: "Mobile scanner & presence tracker with QR code scanning, campus location logging, and role-based actions.",
+    category: "MOBILE APP · IN PROGRESS",
+    title: "QR Student Attendance App",
+    description: "Mobile scanner and presence tracker with QR code scanning, campus location logging and role-based actions.",
     stack: ["React Native", "Expo", "Supabase", "Haptics API", "Location API"],
     image: "/images/attendance.png",
     links: [
@@ -364,7 +149,7 @@ export const projects: Project[] = [
   {
     category: "HEADLESS CMS",
     title: "Craft Multi-Site CMS",
-    description: "Enterprise multi-site content platform for Mariahuis, Sint-Coleta and Cultuur-Colette with Twig templates & Docker.",
+    description: "Enterprise multi-site content platform for Mariahuis, Sint-Coleta and Cultuur-Colette with Twig templates and Docker.",
     stack: ["Craft CMS", "Twig", "Docker", "DDEV", "Composer"],
     image: "/images/craftcms.png",
     links: [
@@ -374,7 +159,7 @@ export const projects: Project[] = [
   {
     category: "FRONTEND",
     title: "STAM Museum Gent",
-    description: "Responsive replica of STAM Gent city museum website built from Figma design. Features hamburger navigation, semantic HTML structure, and fully responsive layout optimized for all devices.",
+    description: "Responsive replica of STAM Gent city museum website built from a Figma design. Features hamburger navigation, semantic HTML structure and a fully responsive layout optimized for all devices.",
     stack: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
     image: "/images/stam.png",
     links: [
@@ -383,7 +168,7 @@ export const projects: Project[] = [
     ],
     features: [
       "Pixel-perfect recreation from Figma design",
-      "Fully responsive across mobile, tablet, and desktop",
+      "Fully responsive across mobile, tablet and desktop",
       "Interactive hamburger menu with smooth animations",
       "SEO-optimized with proper meta tags and robots.txt"
     ]
@@ -391,7 +176,7 @@ export const projects: Project[] = [
   {
     category: "FRONTEND",
     title: "Gamescom 2025",
-    description: "Interactive gaming information website showcasing current games, industry trends, and insights about the future of gaming. Built with modern vanilla JavaScript and fully responsive design.",
+    description: "Interactive gaming information website showcasing current games, industry trends and insights about the future of gaming. Built with modern vanilla JavaScript and fully responsive design.",
     stack: ["HTML5", "CSS3", "Vanilla JavaScript"],
     image: "/images/gamescom.png",
     links: [
@@ -408,7 +193,7 @@ export const projects: Project[] = [
   {
     category: "FRONTEND",
     title: "Best of 2024",
-    description: "Interactive website showcasing the best content of 2024 including albums, games, films, movies and timeless picks. Features theme toggle, slideshow, honorable mentions modal, and API data loading.",
+    description: "Interactive website showcasing the best content of 2024 including albums, games, films and timeless picks. Features theme toggle, slideshow, honorable mentions modal and API data loading.",
     stack: ["HTML", "CSS", "JavaScript", "REST API"],
     image: "/images/bestof_.png",
     links: [
@@ -416,16 +201,16 @@ export const projects: Project[] = [
       { label: "View on GitHub", href: "https://github.com/pgm-2425-atwork-1/project-2-omerasik", icon: "Github", variant: "secondary" }
     ],
     features: [
-      "Dark/Light theme toggle with smooth transitions",
+      "Dark and light theme toggle with smooth transitions",
       "Interactive slideshow for content navigation",
       "Modal window for honorable mentions",
-      "Dynamic data loading from external API"
+      "Dynamic data loading from an external API"
     ]
   },
   {
     category: "FULL-STACK",
     title: "Make It Happen (To-Do + Categories)",
-    description: "Task organizer with JWT login, protected categories and user-specific dashboards using EJS + SQLite ORM.",
+    description: "Task organizer with JWT login, protected categories and user-specific dashboards using EJS and a SQLite ORM.",
     stack: ["Node.js", "Express", "EJS", "Knex", "Objection.js"],
     image: "/images/to_do_app.png",
     links: [
@@ -460,5 +245,3 @@ export const contactDetails: ContactDetail[] = [
     icon: "Github"
   }
 ];
-
-export const contactBullets = [];

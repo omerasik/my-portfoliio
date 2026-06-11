@@ -1,106 +1,115 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  AppWindow, Atom, Blocks, Bot, Box, Braces, Building2, Code, Database,
-  GitBranch, Infinity as InfinityIcon, Layout, Palette, Server, Workflow
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { technicalSkills } from "@/lib/data";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { MousePointer2 } from "lucide-react";
+import { useLang } from "@/lib/i18n";
 import SectionHeader from "@/components/ui/SectionHeader";
+import SkillSphere from "@/components/SkillSphere";
 
-const ICONS: Record<string, LucideIcon> = {
-  Code, Atom, Layout, Palette, Server, Braces, Database, Box, Blocks,
-  GitBranch, Building2, AppWindow, Workflow, Bot, Infinity: InfinityIcon
-};
+/* Cycling terminal: types real commands with their output */
+const SESSIONS: { cmd: string; out: string[] }[] = [
+  { cmd: "whoami", out: ["omer_asik :: full-stack developer"] },
+  { cmd: "cat focus.txt", out: ["automation / ai agents / power platform"] },
+  { cmd: "./deploy.sh --target=prod", out: ["build passed", "shipped in 3.2s"] },
+  { cmd: "node mail-agent.js --run", out: ["42 emails processed", "0 touched by hand"] },
+  { cmd: "git log --oneline -1", out: ["a3f9c1e always learning, always shipping"] }
+];
 
-const categories = ["All", "Automation & AI", "Frontend", "Backend", "Tools"] as const;
+function Terminal() {
+  const [si, setSi] = useState(0);
+  const [typed, setTyped] = useState(0);
+  const [showOut, setShowOut] = useState(false);
 
-const categoryAccent: Record<string, string> = {
-  "Frontend": "cy",
-  "Backend": "vi",
-  "Automation & AI": "mg",
-  "Tools": "cy"
-};
+  useEffect(() => {
+    const session = SESSIONS[si];
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    for (let i = 1; i <= session.cmd.length; i++) {
+      timers.push(setTimeout(() => setTyped(i), 350 + i * 55));
+    }
+    const afterCmd = 350 + session.cmd.length * 55 + 250;
+    timers.push(setTimeout(() => setShowOut(true), afterCmd));
+    timers.push(
+      setTimeout(() => {
+        setShowOut(false);
+        setTyped(0);
+        setSi((v) => (v + 1) % SESSIONS.length);
+      }, afterCmd + 2600)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [si]);
+
+  const session = SESSIONS[si];
+
+  return (
+    <div className="panel ticks flex h-full min-h-[300px] flex-col p-0">
+      <div className="flex items-center justify-between border-b border-edge/15 px-5 py-3">
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-dim">omer@dev: ~</span>
+        <span className="flex gap-1.5">
+          <span className="h-2 w-2 bg-a1/60" />
+          <span className="h-2 w-2 bg-a3/60" />
+          <span className="h-2 w-2 bg-a2/60" />
+        </span>
+      </div>
+      <div className="flex-1 p-5 font-mono text-sm leading-7">
+        <p className="text-ink">
+          <span className="text-a1">$ </span>
+          {session.cmd.slice(0, typed)}
+          <span className="caret" />
+        </p>
+        {showOut &&
+          session.out.map((line, i) => (
+            <motion.p
+              key={line}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: i * 0.15 }}
+              className="text-dim"
+            >
+              {line}
+            </motion.p>
+          ))}
+      </div>
+      <div className="border-t border-edge/15 px-5 py-2.5 font-mono text-[10px] text-dim">
+        <span className="text-a1">[OK]</span> 24 tools loaded / 0 categories needed
+      </div>
+    </div>
+  );
+}
 
 export default function Skills() {
-  const [filter, setFilter] = useState<(typeof categories)[number]>("All");
-
-  const visible =
-    filter === "All" ? technicalSkills : technicalSkills.filter((s) => s.category === filter);
+  const { t } = useLang();
 
   return (
     <section id="skills" className="section-padding relative">
-      <SectionHeader
-        index="03"
-        eyebrow="Skills"
-        title="My toolkit, always expanding."
-        description="From modern web stacks to the Microsoft Power Platform and AI agents — I pick the right tool and learn the missing ones."
-      />
+      <SectionHeader index="03" eyebrow={t.skills.eyebrow} title={t.skills.title} description={t.skills.desc} />
 
-      <div className="mb-10 flex flex-wrap gap-2">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`relative rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 ${
-              filter === cat
-                ? "text-bg"
-                : "border border-edge/20 bg-card/40 text-dim hover:border-cy/40 hover:text-ink"
-            }`}
-          >
-            {filter === cat && (
-              <motion.span
-                layoutId="skill-pill"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-cy via-vi to-mg"
-                transition={{ type: "spring", stiffness: 320, damping: 28 }}
-              />
-            )}
-            <span className="relative">{cat}</span>
-          </button>
-        ))}
+      <div className="grid items-stretch gap-8 lg:grid-cols-5">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8 }}
+          className="relative lg:col-span-3"
+        >
+          <SkillSphere />
+          <p className="mt-2 flex items-center justify-center gap-2 font-mono text-xs text-dim">
+            <MousePointer2 size={12} className="text-a1" />
+            {t.skills.hint}
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 32 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="lg:col-span-2"
+        >
+          <Terminal />
+        </motion.div>
       </div>
-
-      <motion.div layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
-          {visible.map((skill, i) => {
-            const Icon = ICONS[skill.icon] ?? Code;
-            const accent = categoryAccent[skill.category] ?? "cy";
-            return (
-              <motion.div
-                layout
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.85, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.85 }}
-                transition={{ duration: 0.4, delay: i * 0.04 }}
-                whileHover={{ y: -6 }}
-                className="border-aurora group p-6 backdrop-blur"
-              >
-                <div className="flex items-start justify-between">
-                  <span
-                    className={`flex h-11 w-11 items-center justify-center rounded-xl border bg-card/60 transition-all duration-300 ${
-                      accent === "mg"
-                        ? "border-mg/30 text-mg group-hover:shadow-glow-mg"
-                        : accent === "vi"
-                        ? "border-vi/30 text-vi group-hover:shadow-glow-vi"
-                        : "border-cy/30 text-cy group-hover:shadow-glow-cy"
-                    }`}
-                  >
-                    <Icon size={20} />
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-dim">
-                    {skill.category}
-                  </span>
-                </div>
-                <h3 className="mt-4 font-display text-lg font-bold">{skill.name}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-dim">{skill.description}</p>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </motion.div>
     </section>
   );
 }

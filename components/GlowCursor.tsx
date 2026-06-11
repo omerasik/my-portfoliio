@@ -23,7 +23,7 @@ export default function GlowCursor() {
       const interactive = !!target.closest("a, button, [role='button']");
       ring.style.width = interactive ? "52px" : "36px";
       ring.style.height = interactive ? "52px" : "36px";
-      ring.style.borderColor = interactive ? "rgb(var(--mg) / 0.8)" : "rgb(var(--cy) / 0.5)";
+      ring.style.borderColor = interactive ? "rgb(var(--a3) / 0.8)" : "rgb(var(--a1) / 0.5)";
     };
 
     const loop = () => {
@@ -48,7 +48,7 @@ export default function GlowCursor() {
         ref={ringRef}
         className="pointer-events-none fixed left-0 top-0 z-[9999] h-9 w-9 rounded-full border"
         style={{
-          borderColor: "rgb(var(--cy) / 0.5)",
+          borderColor: "rgb(var(--a1) / 0.5)",
           transition: "width 0.25s, height 0.25s, border-color 0.25s"
         }}
       />
@@ -56,8 +56,8 @@ export default function GlowCursor() {
         ref={dotRef}
         className="pointer-events-none fixed left-0 top-0 z-[9999] h-1.5 w-1.5 rounded-full"
         style={{
-          background: "rgb(var(--cy))",
-          boxShadow: "0 0 10px rgb(var(--cy)), 0 0 22px rgb(var(--cy) / 0.5)"
+          background: "rgb(var(--a1))",
+          boxShadow: "0 0 10px rgb(var(--a1)), 0 0 22px rgb(var(--a1) / 0.5)"
         }}
       />
     </div>

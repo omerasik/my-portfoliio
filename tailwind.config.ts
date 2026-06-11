@@ -11,9 +11,9 @@ const config: Config = {
         edge: "rgb(var(--edge) / <alpha-value>)",
         ink:  "rgb(var(--ink) / <alpha-value>)",
         dim:  "rgb(var(--dim) / <alpha-value>)",
-        cy:   "rgb(var(--cy) / <alpha-value>)",
-        vi:   "rgb(var(--vi) / <alpha-value>)",
-        mg:   "rgb(var(--mg) / <alpha-value>)"
+        a1:   "rgb(var(--a1) / <alpha-value>)",
+        a2:   "rgb(var(--a2) / <alpha-value>)",
+        a3:   "rgb(var(--a3) / <alpha-value>)"
       },
       fontFamily: {
         display: ["var(--font-syne)", "system-ui", "sans-serif"],
@@ -21,11 +21,10 @@ const config: Config = {
         mono:    ["var(--font-jetbrains)", "monospace"]
       },
       boxShadow: {
-        "glow-cy": "0 0 36px rgb(var(--cy) / 0.35)",
-        "glow-vi": "0 0 36px rgb(var(--vi) / 0.35)",
-        "glow-mg": "0 0 30px rgb(var(--mg) / 0.3)",
-        card: "0 20px 60px rgb(0 0 0 / 0.35)",
-        "card-hover": "0 30px 80px rgb(0 0 0 / 0.45), 0 0 40px rgb(var(--vi) / 0.25)"
+        "glow-a1": "0 0 36px rgb(var(--a1) / 0.35)",
+        "glow-a2": "0 0 36px rgb(var(--a2) / 0.35)",
+        "glow-a3": "0 0 30px rgb(var(--a3) / 0.3)",
+        card: "0 20px 60px rgb(0 0 0 / 0.35)"
       }
     }
   },
