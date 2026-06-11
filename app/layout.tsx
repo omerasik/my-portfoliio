@@ -8,6 +8,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import GlowCursor from "@/components/GlowCursor";
 import Intro from "@/components/Intro";
 import { LanguageProvider } from "@/lib/i18n";
+import { projects } from "@/lib/data";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const syne = Syne({ subsets: ["latin"], variable: "--font-syne", weight: ["400", "600", "700", "800"], display: "swap" });
@@ -52,6 +53,11 @@ export const metadata: Metadata = {
   publisher: FULL_NAME,
   applicationName: "Ömer Faruk Aşık (Omer Asik) — Portfolio",
   category: "technology",
+  colorScheme: "dark light",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0e141b" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f5f0" }
+  ],
   alternates: { canonical: SITE_URL },
   robots: {
     index: true,
@@ -90,6 +96,26 @@ const themeScript = `
 })();
 `;
 
+/* Map real (publicly linkable) projects to schema entities so search engines and
+   AI assistants can enumerate and cite Omer Asik's actual work. */
+const projectListItems = projects
+  .map((p) => {
+    const link = p.links.find((l) => typeof l.href === "string" && l.href.startsWith("http"));
+    if (!link?.href) return null;
+    const isRepo = link.href.includes("github.com");
+    return {
+      "@type": "SoftwareSourceCode",
+      name: p.title,
+      description: p.description,
+      ...(isRepo ? { codeRepository: link.href } : { url: link.href }),
+      programmingLanguage: p.stack,
+      keywords: p.stack.join(", "),
+      author: { "@id": `${SITE_URL}/#person` }
+    };
+  })
+  .filter(Boolean)
+  .map((item, i) => ({ "@type": "ListItem", position: i + 1, item }));
+
 const personJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -105,6 +131,7 @@ const personJsonLd = {
       image: PROFILE_IMAGE,
       email: "mailto:omerfarukasik54@gmail.com",
       jobTitle: ["Full-Stack Developer", "Automation Engineer"],
+      mainEntityOfPage: { "@id": `${SITE_URL}/#profilepage` },
       description:
         "Ömer Faruk Aşık (also written Omer Asik or Omer Faruk Asik) is a full-stack developer and automation engineer based in Ghent, Belgium. He builds modern web applications with React, Next.js, TypeScript, Node.js and Laravel, and business automation and AI agents on the Microsoft Power Platform and Dynamics 365 Business Central.",
       disambiguatingDescription:
@@ -192,6 +219,16 @@ const personJsonLd = {
           }
         }
       ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/#projects`,
+      name: "Projects by Ömer Faruk Aşık (Omer Asik)",
+      description:
+        "Selected web, mobile, automation and AI projects built by Ömer Faruk Aşık (Omer Asik).",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: projectListItems.length,
+      itemListElement: projectListItems
     }
   ]
 };
