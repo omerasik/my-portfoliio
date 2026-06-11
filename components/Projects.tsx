@@ -198,6 +198,7 @@ function ProjectCard({ project, index, viewLabel, onOpen }: { project: Project; 
                       src={img}
                       alt={`${project.title} screenshot ${idx + 1}`}
                       fill
+                      sizes="(max-width: 640px) 33vw, (max-width: 1024px) 17vw, 11vw"
                       className="object-contain transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
@@ -206,8 +207,9 @@ function ProjectCard({ project, index, viewLabel, onOpen }: { project: Project; 
             ) : project.image ? (
               <Image
                 src={project.image}
-                alt={project.title}
+                alt={`${project.title} — project preview`}
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (

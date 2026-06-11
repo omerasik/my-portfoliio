@@ -75,8 +75,9 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="font-display text-[clamp(3rem,11vw,8.5rem)] font-extrabold leading-[0.95] tracking-tight"
         >
-          <span className="glitch block" data-text="OMER">OMER</span>
-          <span className="glitch text-signal-animated block" data-text="ASIK">ASIK</span>
+          <span className="sr-only">Ömer Faruk Aşık (Omer Asik) — Full-Stack &amp; Automation Developer in Ghent, Belgium</span>
+          <span aria-hidden className="glitch block" data-text="OMER">OMER</span>
+          <span aria-hidden className="glitch text-signal-animated block" data-text="ASIK">ASIK</span>
         </motion.h1>
 
         <motion.div
