@@ -23,9 +23,19 @@ export type EducationItem = {
 
 export type SkillCard = {
   name: string;
-  category: "Frontend" | "Backend" | "Tools";
+  category: "Frontend" | "Backend" | "Automation & AI" | "Tools";
   description: string;
   icon: string;
+};
+
+export type ExperienceItem = {
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  description: string;
+  highlights: string[];
+  tags: string[];
 };
 
 export type Service = {
@@ -62,7 +72,7 @@ export type ContactDetail = {
 export const navItems: NavItem[] = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
-  // { label: "Education", href: "#education" },
+  { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
@@ -76,9 +86,40 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const heroStats: Stat[] = [
-  { label: "Focus", value: "Full-Stack Web" },
-  { label: "Location", value: "Drongen, BE" },
-  { label: "Availability", value: "Internships & Junior roles" }
+  { label: "Focus", value: "Full-Stack · Automation · AI" },
+  { label: "Location", value: "Ghent, Belgium" },
+  { label: "Status", value: "Open to junior roles" }
+];
+
+export const heroRoles = [
+  "Full-Stack Developer",
+  "Automation Engineer",
+  "AI Agent Builder",
+  "Power Platform Developer"
+];
+
+export const techMarquee = [
+  "React", "Next.js", "TypeScript", "Node.js", "Business Central", "AL",
+  "Power Apps", "Power Automate", "Azure DevOps", "AI Agents", "Supabase",
+  "Laravel", "Docker", "MySQL", "React Native", "Tailwind CSS"
+];
+
+export const experience: ExperienceItem[] = [
+  {
+    company: "Astena",
+    role: "Software Developer Intern",
+    period: "2026 · Internship",
+    location: "Belgium",
+    description:
+      "Internship at Astena, a Microsoft solutions partner, working on business automation and AI inside the Microsoft ecosystem.",
+    highlights: [
+      "Developed extensions in Microsoft Dynamics 365 Business Central using AL",
+      "Built Power Apps solutions and automated business workflows with Power Automate",
+      "Managed Power Platform solutions and deployment pipelines with Azure DevOps",
+      "Built an AI Mail Agent that automates the processing of incoming customer emails"
+    ],
+    tags: ["Business Central", "AL", "Power Apps", "Power Automate", "Azure DevOps", "AI Agents"]
+  }
 ];
 
 export const languages = ["English", "Dutch", "Turkish"] as const;
@@ -148,6 +189,36 @@ export const technicalSkills: SkillCard[] = [
     icon: "Database"
   },
   {
+    name: "Business Central · AL",
+    category: "Automation & AI",
+    description: "Custom extensions and business logic in Dynamics 365 Business Central.",
+    icon: "Building2"
+  },
+  {
+    name: "Power Apps",
+    category: "Automation & AI",
+    description: "Low-code business apps connected to live company data.",
+    icon: "AppWindow"
+  },
+  {
+    name: "Power Automate",
+    category: "Automation & AI",
+    description: "Automated workflows that remove repetitive manual work.",
+    icon: "Workflow"
+  },
+  {
+    name: "Azure DevOps",
+    category: "Automation & AI",
+    description: "Solution management, repos, and deployment pipelines.",
+    icon: "Infinity"
+  },
+  {
+    name: "AI Agents & LLMs",
+    category: "Automation & AI",
+    description: "AI-powered agents that read, classify, and act on real data.",
+    icon: "Bot"
+  },
+  {
     name: "Docker",
     category: "Tools",
     description: "Containerized dev environments and deployment scripts.",
@@ -213,6 +284,22 @@ export const services: Service[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    category: "AI · AUTOMATION — ASTENA INTERNSHIP",
+    title: "AI Mail Agent",
+    description:
+      "An intelligent mail agent built during my internship at Astena. It automatically reads incoming customer emails, classifies them with AI, extracts the relevant data, and triggers the right business workflow — turning a manual inbox process into a hands-free pipeline integrated with the Microsoft ecosystem.",
+    stack: ["AI / LLM", "Power Automate", "Power Apps", "Business Central", "Azure DevOps"],
+    links: [
+      { label: "Built at Astena · Private codebase", variant: "muted" }
+    ],
+    features: [
+      "AI-powered classification and data extraction from incoming emails",
+      "Automated business workflows triggered from email content",
+      "Integrated with Dynamics 365 Business Central",
+      "Deployed through Azure DevOps solution pipelines"
+    ]
+  },
   {
     category: "FULL-STACK",
     title: "School Tracking Platform",
