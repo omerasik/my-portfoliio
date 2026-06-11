@@ -77,12 +77,12 @@ function MailAgentVisual() {
 }
 
 /* Brand icons (inline, 24x24 simple-icons paths) */
-type Brand = { name: string; color: string; path?: string; node?: ReactNode };
+type Brand = { name: string; color?: string; themed?: boolean; path?: string; node?: ReactNode };
 
 const SOCIAL_BRANDS: Brand[] = [
   {
     name: "X",
-    color: "#f5f5f5",
+    themed: true,
     path: "M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
   },
   {
@@ -103,7 +103,7 @@ const SOCIAL_BRANDS: Brand[] = [
   },
   {
     name: "TikTok",
-    color: "#f5f5f5",
+    themed: true,
     path: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
   },
   {
@@ -126,68 +126,45 @@ function BrandGlyph({ brand, size = 18 }: { brand: Brand; size?: number }) {
   );
 }
 
-/* Social media automation visual: platforms orbiting an automation core */
+/* Social media automation visual: static grid of platforms feeding an automation engine */
 function SocialAutomationVisual() {
-  const R = 58;
   return (
-    <div className="relative flex h-44 items-center justify-center overflow-hidden bg-bg2">
-      <span className="absolute inset-0 bg-gradient-to-br from-a1/15 via-transparent to-a2/15" />
+    <div className="relative flex h-44 flex-col items-center justify-center gap-4 overflow-hidden bg-bg2 px-6">
+      <span className="absolute inset-0 bg-gradient-to-br from-a1/12 via-transparent to-a2/12" />
       <span
-        className="pointer-events-none absolute inset-0 opacity-50"
+        className="pointer-events-none absolute inset-0 opacity-40"
         style={{
-          backgroundImage: "radial-gradient(circle, rgb(var(--a2) / 0.4) 1px, transparent 1.4px)",
+          backgroundImage: "radial-gradient(circle, rgb(var(--edge) / 0.35) 1px, transparent 1.4px)",
           backgroundSize: "22px 22px",
-          maskImage: "radial-gradient(circle at 50% 50%, black 30%, transparent 75%)",
-          WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 30%, transparent 75%)"
+          maskImage: "radial-gradient(ellipse 80% 75% at 50% 45%, black 35%, transparent 80%)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 75% at 50% 45%, black 35%, transparent 80%)"
         }}
       />
 
-      {/* orbit ring */}
-      <span
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-edge/30"
-        style={{ width: R * 2, height: R * 2 }}
-      />
+      {/* platform row */}
+      <div className="relative z-10 flex items-center gap-2.5 sm:gap-3">
+        {SOCIAL_BRANDS.map((brand) => (
+          <span
+            key={brand.name}
+            title={brand.name}
+            className={`flex h-9 w-9 items-center justify-center rounded-xl border border-edge/25 bg-card/90 shadow-sm backdrop-blur sm:h-10 sm:w-10 ${
+              brand.themed ? "text-ink" : ""
+            }`}
+            style={brand.themed ? undefined : { color: brand.color }}
+          >
+            <BrandGlyph brand={brand} />
+          </span>
+        ))}
+      </div>
 
-      {/* orbiting platform tiles */}
-      <motion.div
-        className="absolute left-1/2 top-1/2"
-        style={{ width: 0, height: 0 }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
-      >
-        {SOCIAL_BRANDS.map((brand, i) => {
-          const angle = (i / SOCIAL_BRANDS.length) * 360;
-          return (
-            <div
-              key={brand.name}
-              className="absolute"
-              style={{ transform: `rotate(${angle}deg) translateY(-${R}px)` }}
-            >
-              <motion.span
-                className="flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-edge/25 bg-card/90 backdrop-blur"
-                style={{ color: brand.color }}
-                animate={{ rotate: -360 }}
-                transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
-                title={brand.name}
-              >
-                <BrandGlyph brand={brand} />
-              </motion.span>
-            </div>
-          );
-        })}
-      </motion.div>
+      {/* connector */}
+      <span className="relative z-10 h-5 w-px bg-gradient-to-b from-edge/40 to-a1/60" />
 
-      {/* automation core */}
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ type: "spring", stiffness: 220, damping: 18 }}
-        className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-a1 to-a2 text-bg shadow-glow-a1"
-      >
-        <span className="animate-pulse-ring absolute inset-0 rounded-2xl border border-a1/60" />
-        <Bot size={26} />
-      </motion.div>
+      {/* automation engine pill */}
+      <div className="relative z-10 flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-a1 to-a2 px-4 py-2 text-bg shadow-glow-a1">
+        <Bot size={18} />
+        <span className="font-mono text-xs font-semibold tracking-wide">auto-publish</span>
+      </div>
     </div>
   );
 }
