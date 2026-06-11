@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AppWindow, Bot, MonitorSmartphone, ServerCog, Users, Workflow } from "lucide-react";
+import { Bot, Layers, Users, Workflow } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import SectionHeader from "@/components/ui/SectionHeader";
 
-const ICONS: LucideIcon[] = [AppWindow, MonitorSmartphone, ServerCog, Workflow, Bot, Users];
+const ICONS: LucideIcon[] = [Layers, Workflow, Bot, Users];
 
 export default function Services() {
   const { t } = useLang();
@@ -15,9 +15,9 @@ export default function Services() {
     <section id="services" className="section-padding relative">
       <SectionHeader index="04" eyebrow={t.services.eyebrow} title={t.services.title} />
 
-      <div className="grid gap-px border border-edge/15 bg-edge/10 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-px border border-edge/15 bg-edge/10 sm:grid-cols-2">
         {t.services.items.map((service, i) => {
-          const Icon = ICONS[i] ?? AppWindow;
+          const Icon = ICONS[i] ?? Layers;
           return (
             <motion.div
               key={service.title}

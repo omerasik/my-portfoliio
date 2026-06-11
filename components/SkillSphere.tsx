@@ -14,10 +14,20 @@ function readVar(name: string): RGB {
 /**
  * 3D rotating word sphere. No dependencies: Fibonacci sphere
  * distribution + perspective projection on a 2D canvas.
- * Auto-rotates, drag to spin, hover highlights the nearest skill.
+ * Auto-rotates, drag to spin, hover highlights and click selects a skill.
  */
-export default function SkillSphere() {
+export default function SkillSphere({
+  onSelect,
+  selected
+}: {
+  onSelect?: (label: string) => void;
+  selected?: string | null;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const onSelectRef = useRef(onSelect);
+  const selectedRef = useRef(selected);
+  onSelectRef.current = onSelect;
+  selectedRef.current = selected;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -64,19 +74,41 @@ export default function SkillSphere() {
     let rotX = -0.25, rotY = 0;
     let velX = 0, velY = 0.0028;
     let dragging = false;
+    let moved = false;
     let lastX = 0, lastY = 0;
+    let downX = 0, downY = 0;
     let pointerX = -1e4, pointerY = -1e4;
+
+    // Latest projected nodes, used for click picking
+    let lastProj: { label: string; sx: number; sy: number; z: number; f: number }[] = [];
+
+    const pickAt = (x: number, y: number): string | null => {
+      let hit = -1;
+      let best = 50 * 50;
+      lastProj.forEach((p, i) => {
+        if (p.z > 0.25) return;
+        const dx = p.sx - x;
+        const dy = p.sy - y;
+        const d = dx * dx + dy * dy;
+        if (d < best) { best = d; hit = i; }
+      });
+      return hit >= 0 ? lastProj[hit].label : null;
+    };
 
     const onDown = (e: PointerEvent) => {
       dragging = true;
+      moved = false;
       lastX = e.clientX;
       lastY = e.clientY;
+      downX = e.clientX;
+      downY = e.clientY;
     };
     const onMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       pointerX = e.clientX - rect.left;
       pointerY = e.clientY - rect.top;
       if (!dragging) return;
+      if (Math.abs(e.clientX - downX) + Math.abs(e.clientY - downY) > 6) moved = true;
       velY = (e.clientX - lastX) * 0.00035;
       velX = (e.clientY - lastY) * -0.00035;
       rotY += (e.clientX - lastX) * 0.005;
@@ -84,7 +116,15 @@ export default function SkillSphere() {
       lastX = e.clientX;
       lastY = e.clientY;
     };
-    const onUp = () => { dragging = false; };
+    const onUp = (e: PointerEvent) => {
+      // A tap (no real drag) selects the nearest front-facing node
+      if (dragging && !moved && onSelectRef.current) {
+        const rect = canvas.getBoundingClientRect();
+        const label = pickAt(e.clientX - rect.left, e.clientY - rect.top);
+        if (label) onSelectRef.current(label);
+      }
+      dragging = false;
+    };
     const onLeave = () => { pointerX = -1e4; pointerY = -1e4; dragging = false; };
 
     canvas.addEventListener("pointerdown", onDown);
@@ -127,6 +167,9 @@ export default function SkillSphere() {
         const f = 2.2 / (2.2 + z);
         return { label: p.label, sx: cx + x * R * f, sy: cyc + y * R * f, z, f };
       });
+      lastProj = proj;
+
+      const activeLabel = selectedRef.current;
 
       let hovered = -1;
       let best = 42 * 42;
@@ -138,9 +181,12 @@ export default function SkillSphere() {
         if (d < best) { best = d; hovered = i; }
       });
 
-      // faint connection lines from hovered node
-      if (hovered >= 0) {
-        const h = proj[hovered];
+      // faint connection lines from the active node (selected wins over hovered)
+      const linkFrom = activeLabel
+        ? proj.findIndex((p) => p.label === activeLabel)
+        : hovered;
+      if (linkFrom >= 0) {
+        const h = proj[linkFrom];
         ctx.lineWidth = 1;
         for (const p of proj) {
           if (p === h || p.z > 0.4) continue;
@@ -160,16 +206,20 @@ export default function SkillSphere() {
       for (const i of order) {
         const p = proj[i];
         const depth = (1 - p.z) / 2; // 0 back, 1 front
-        const isHover = i === hovered;
-        const size = (11 + depth * 7) * (isHover ? 1.45 : 1);
-        ctx.font = `${isHover ? "700" : "500"} ${size}px var(--font-jetbrains), monospace`;
+        const isSelected = activeLabel === p.label;
+        const isHover = i === hovered && !isSelected;
+        const emphasised = isSelected || isHover;
+        const size = (11 + depth * 7) * (emphasised ? 1.45 : 1);
+        ctx.font = `${emphasised ? "700" : "500"} ${size}px var(--font-jetbrains), monospace`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        if (isHover) {
-          ctx.shadowBlur = 16;
-          ctx.shadowColor = `rgb(${cA1[0]},${cA1[1]},${cA1[2]})`;
-          ctx.fillStyle = `rgb(${cA1[0]},${cA1[1]},${cA1[2]})`;
+        if (emphasised) {
+          // selected = amber, hover = mint
+          const c = isSelected ? cA2 : cA1;
+          ctx.shadowBlur = isSelected ? 22 : 16;
+          ctx.shadowColor = `rgb(${c[0]},${c[1]},${c[2]})`;
+          ctx.fillStyle = `rgb(${c[0]},${c[1]},${c[2]})`;
           ctx.globalAlpha = 1;
         } else {
           const t = depth;
@@ -177,13 +227,13 @@ export default function SkillSphere() {
           const g = cDim[1] + (cInk[1] - cDim[1]) * t;
           const b = cDim[2] + (cInk[2] - cDim[2]) * t;
           ctx.fillStyle = `rgb(${r | 0},${g | 0},${b | 0})`;
-          ctx.globalAlpha = 0.25 + depth * 0.75;
+          ctx.globalAlpha = activeLabel ? (0.12 + depth * 0.4) : (0.25 + depth * 0.75);
           ctx.shadowBlur = 0;
         }
         ctx.fillText(p.label, p.sx, p.sy);
 
         // small node dot under front labels
-        if (depth > 0.55 && !isHover) {
+        if (depth > 0.55 && !emphasised) {
           ctx.globalAlpha = 0.5 * depth;
           ctx.fillStyle = `rgb(${cA2[0]},${cA2[1]},${cA2[2]})`;
           ctx.fillRect(p.sx - 1, p.sy + size * 0.75, 2, 2);

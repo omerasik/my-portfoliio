@@ -76,6 +76,122 @@ function MailAgentVisual() {
   );
 }
 
+/* Brand icons (inline, 24x24 simple-icons paths) */
+type Brand = { name: string; color: string; path?: string; node?: ReactNode };
+
+const SOCIAL_BRANDS: Brand[] = [
+  {
+    name: "X",
+    color: "#f5f5f5",
+    path: "M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+  },
+  {
+    name: "Instagram",
+    color: "#E1306C",
+    node: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="2" />
+        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
+        <circle cx="17.3" cy="6.7" r="1.3" fill="currentColor" />
+      </>
+    )
+  },
+  {
+    name: "YouTube",
+    color: "#FF0000",
+    path: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+  },
+  {
+    name: "TikTok",
+    color: "#f5f5f5",
+    path: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
+  },
+  {
+    name: "LinkedIn",
+    color: "#0A66C2",
+    path: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+  },
+  {
+    name: "Reddit",
+    color: "#FF4500",
+    path: "M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12c-.688 0-1.25.561-1.25 1.25 0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"
+  }
+];
+
+function BrandGlyph({ brand, size = 18 }: { brand: Brand; size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill={brand.path ? "currentColor" : "none"} aria-hidden>
+      {brand.node ?? <path d={brand.path} />}
+    </svg>
+  );
+}
+
+/* Social media automation visual: platforms orbiting an automation core */
+function SocialAutomationVisual() {
+  const R = 58;
+  return (
+    <div className="relative flex h-44 items-center justify-center overflow-hidden bg-bg2">
+      <span className="absolute inset-0 bg-gradient-to-br from-a1/15 via-transparent to-a2/15" />
+      <span
+        className="pointer-events-none absolute inset-0 opacity-50"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgb(var(--a2) / 0.4) 1px, transparent 1.4px)",
+          backgroundSize: "22px 22px",
+          maskImage: "radial-gradient(circle at 50% 50%, black 30%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 30%, transparent 75%)"
+        }}
+      />
+
+      {/* orbit ring */}
+      <span
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-edge/30"
+        style={{ width: R * 2, height: R * 2 }}
+      />
+
+      {/* orbiting platform tiles */}
+      <motion.div
+        className="absolute left-1/2 top-1/2"
+        style={{ width: 0, height: 0 }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
+      >
+        {SOCIAL_BRANDS.map((brand, i) => {
+          const angle = (i / SOCIAL_BRANDS.length) * 360;
+          return (
+            <div
+              key={brand.name}
+              className="absolute"
+              style={{ transform: `rotate(${angle}deg) translateY(-${R}px)` }}
+            >
+              <motion.span
+                className="flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-edge/25 bg-card/90 backdrop-blur"
+                style={{ color: brand.color }}
+                animate={{ rotate: -360 }}
+                transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
+                title={brand.name}
+              >
+                <BrandGlyph brand={brand} />
+              </motion.span>
+            </div>
+          );
+        })}
+      </motion.div>
+
+      {/* automation core */}
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ type: "spring", stiffness: 220, damping: 18 }}
+        className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-a1 to-a2 text-bg shadow-glow-a1"
+      >
+        <span className="animate-pulse-ring absolute inset-0 rounded-2xl border border-a1/60" />
+        <Bot size={26} />
+      </motion.div>
+    </div>
+  );
+}
+
 function ProjectCard({ project, index, viewLabel, onOpen }: { project: Project; index: number; viewLabel: string; onOpen: () => void }) {
   const featured = index === 0;
 
@@ -93,6 +209,8 @@ function ProjectCard({ project, index, viewLabel, onOpen }: { project: Project; 
       >
         {featured ? (
           <MailAgentVisual />
+        ) : project.visual === "social" ? (
+          <SocialAutomationVisual />
         ) : (
           <div className="relative h-44 overflow-hidden bg-bg2">
             {project.images && project.images.length > 0 ? (

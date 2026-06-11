@@ -75,7 +75,7 @@ const en: Dict = {
     currentlyRole: "Software Developer Intern",
     currentlyCompany: "Astena",
     currentlyDesc: "Business Central (AL) development, Power Apps and Power Automate solutions, Azure DevOps pipelines, and an AI Mail Agent that automates real customer email workflows.",
-    humanSkills: "Human skills",
+    humanSkills: "Soft skills",
     soft: ["Teamwork", "Curiosity", "Time management", "Flexibility", "Communication", "Customer focus", "Creativity", "Accuracy", "Reliability"],
     learning: "Always learning, currently deep in AI agents and the Power Platform."
   },
@@ -102,16 +102,14 @@ const en: Dict = {
     eyebrow: "Skills",
     title: "One orbit, many tools.",
     desc: "Modern web stacks, the Microsoft Power Platform and AI agents. I pick the right tool for the job and learn the missing ones on the way.",
-    hint: "Drag to spin · move to explore"
+    hint: "Drag to spin · tap a node to inspect it"
   },
   services: {
     eyebrow: "What I do",
     title: "From idea to running product.",
     items: [
-      { title: "Web Application Development", desc: "Responsive full-stack applications with clean UI, reusable components and maintainable codebases." },
-      { title: "Front-End Development", desc: "Modern interfaces in React with motion, accessibility and thoughtful typography." },
-      { title: "Back-End & API Development", desc: "REST APIs, authentication flows and services with Node.js and PHP." },
-      { title: "Business Automation", desc: "Power Apps, Power Automate and Business Central solutions that remove repetitive work." },
+      { title: "Full-Stack Development", desc: "End-to-end web apps: React frontends, Node.js & PHP backends, REST APIs and maintainable code." },
+      { title: "Automations", desc: "Power Apps, Power Automate and Business Central solutions that remove repetitive work." },
       { title: "AI Agents & Integrations", desc: "AI-powered agents and integrations that read, classify and act on real data." },
       { title: "Consulting & Collaboration", desc: "Working with designers, developers and stakeholders to turn ideas into testable prototypes." }
     ]
@@ -160,7 +158,7 @@ const nl: Dict = {
     currentlyRole: "Software Developer Stagiair",
     currentlyCompany: "Astena",
     currentlyDesc: "Business Central (AL)-ontwikkeling, Power Apps- en Power Automate-oplossingen, Azure DevOps-pipelines, en een AI Mail Agent die echte e-mailworkflows van klanten automatiseert.",
-    humanSkills: "Menselijke skills",
+    humanSkills: "Soft skills",
     soft: ["Teamwork", "Nieuwsgierigheid", "Timemanagement", "Flexibiliteit", "Communicatie", "Klantgerichtheid", "Creativiteit", "Nauwkeurigheid", "Betrouwbaarheid"],
     learning: "Altijd aan het leren, momenteel volop bezig met AI-agents en het Power Platform."
   },
@@ -187,16 +185,14 @@ const nl: Dict = {
     eyebrow: "Skills",
     title: "Eén baan, veel tools.",
     desc: "Moderne webstacks, het Microsoft Power Platform en AI-agents. Ik kies de juiste tool voor de job en leer de ontbrekende onderweg.",
-    hint: "Sleep om te draaien · beweeg om te verkennen"
+    hint: "Sleep om te draaien · tik op een node voor info"
   },
   services: {
     eyebrow: "Wat ik doe",
     title: "Van idee tot draaiend product.",
     items: [
-      { title: "Webapplicaties", desc: "Responsieve full-stack applicaties met cleane UI, herbruikbare componenten en onderhoudbare code." },
-      { title: "Front-End Development", desc: "Moderne interfaces in React met motion, toegankelijkheid en doordachte typografie." },
-      { title: "Back-End & API Development", desc: "REST API's, authenticatieflows en services met Node.js en PHP." },
-      { title: "Bedrijfsautomatisatie", desc: "Power Apps-, Power Automate- en Business Central-oplossingen die repetitief werk wegnemen." },
+      { title: "Full-Stack Development", desc: "End-to-end webapps: React-frontends, Node.js- & PHP-backends, REST API's en onderhoudbare code." },
+      { title: "Automatisaties", desc: "Power Apps-, Power Automate- en Business Central-oplossingen die repetitief werk wegnemen." },
       { title: "AI-agents & Integraties", desc: "AI-gedreven agents en integraties die echte data lezen, classificeren en verwerken." },
       { title: "Consulting & Samenwerking", desc: "Samenwerken met designers, developers en stakeholders om ideeën om te zetten in testbare prototypes." }
     ]
@@ -245,7 +241,7 @@ const fr: Dict = {
     currentlyRole: "Stagiaire Développeur Logiciel",
     currentlyCompany: "Astena",
     currentlyDesc: "Développement Business Central (AL), solutions Power Apps et Power Automate, pipelines Azure DevOps, et un Agent Mail IA qui automatise de vrais flux d'e-mails clients.",
-    humanSkills: "Compétences humaines",
+    humanSkills: "Soft skills",
     soft: ["Esprit d'équipe", "Curiosité", "Gestion du temps", "Flexibilité", "Communication", "Orientation client", "Créativité", "Précision", "Fiabilité"],
     learning: "Toujours en apprentissage, actuellement plongé dans les agents IA et la Power Platform."
   },
@@ -272,16 +268,14 @@ const fr: Dict = {
     eyebrow: "Compétences",
     title: "Une orbite, beaucoup d'outils.",
     desc: "Stacks web modernes, Microsoft Power Platform et agents IA. Je choisis le bon outil pour chaque tâche et j'apprends ceux qui manquent en chemin.",
-    hint: "Glissez pour faire tourner · survolez pour explorer"
+    hint: "Glissez pour tourner · cliquez sur un nœud pour l'inspecter"
   },
   services: {
     eyebrow: "Ce que je fais",
     title: "De l'idée au produit en production.",
     items: [
-      { title: "Applications Web", desc: "Applications full-stack responsives avec une UI propre, des composants réutilisables et un code maintenable." },
-      { title: "Développement Front-End", desc: "Interfaces modernes en React avec animation, accessibilité et typographie soignée." },
-      { title: "Back-End & API", desc: "API REST, flux d'authentification et services avec Node.js et PHP." },
-      { title: "Automatisation d'Entreprise", desc: "Solutions Power Apps, Power Automate et Business Central qui éliminent le travail répétitif." },
+      { title: "Développement Full-Stack", desc: "Applications web de bout en bout : frontends React, backends Node.js & PHP, API REST et code maintenable." },
+      { title: "Automatisations", desc: "Solutions Power Apps, Power Automate et Business Central qui éliminent le travail répétitif." },
       { title: "Agents IA & Intégrations", desc: "Agents et intégrations propulsés par l'IA qui lisent, classifient et agissent sur de vraies données." },
       { title: "Conseil & Collaboration", desc: "Travailler avec designers, développeurs et parties prenantes pour transformer les idées en prototypes testables." }
     ]
@@ -330,7 +324,7 @@ const es: Dict = {
     currentlyRole: "Desarrollador de Software en Prácticas",
     currentlyCompany: "Astena",
     currentlyDesc: "Desarrollo en Business Central (AL), soluciones Power Apps y Power Automate, pipelines de Azure DevOps, y un Agente de Correo IA que automatiza flujos reales de correo de clientes.",
-    humanSkills: "Habilidades humanas",
+    humanSkills: "Soft skills",
     soft: ["Trabajo en equipo", "Curiosidad", "Gestión del tiempo", "Flexibilidad", "Comunicación", "Orientación al cliente", "Creatividad", "Precisión", "Fiabilidad"],
     learning: "Siempre aprendiendo, ahora inmerso en agentes de IA y la Power Platform."
   },
@@ -357,16 +351,14 @@ const es: Dict = {
     eyebrow: "Habilidades",
     title: "Una órbita, muchas herramientas.",
     desc: "Stacks web modernos, Microsoft Power Platform y agentes de IA. Elijo la herramienta adecuada para cada trabajo y aprendo las que faltan por el camino.",
-    hint: "Arrastra para girar · pasa el cursor para explorar"
+    hint: "Arrastra para girar · toca un nodo para inspeccionarlo"
   },
   services: {
     eyebrow: "Qué hago",
     title: "De la idea al producto en marcha.",
     items: [
-      { title: "Aplicaciones Web", desc: "Aplicaciones full-stack responsivas con UI limpia, componentes reutilizables y código mantenible." },
-      { title: "Desarrollo Front-End", desc: "Interfaces modernas en React con animación, accesibilidad y tipografía cuidada." },
-      { title: "Back-End & APIs", desc: "APIs REST, flujos de autenticación y servicios con Node.js y PHP." },
-      { title: "Automatización Empresarial", desc: "Soluciones de Power Apps, Power Automate y Business Central que eliminan el trabajo repetitivo." },
+      { title: "Desarrollo Full-Stack", desc: "Apps web de extremo a extremo: frontends en React, backends en Node.js y PHP, APIs REST y código mantenible." },
+      { title: "Automatizaciones", desc: "Soluciones de Power Apps, Power Automate y Business Central que eliminan el trabajo repetitivo." },
       { title: "Agentes IA & Integraciones", desc: "Agentes e integraciones impulsados por IA que leen, clasifican y actúan sobre datos reales." },
       { title: "Consultoría & Colaboración", desc: "Trabajar con diseñadores, desarrolladores y stakeholders para convertir ideas en prototipos testeables." }
     ]
@@ -415,7 +407,7 @@ const tr: Dict = {
     currentlyRole: "Yazılım Geliştirici Stajyeri",
     currentlyCompany: "Astena",
     currentlyDesc: "Business Central (AL) geliştirme, Power Apps ve Power Automate çözümleri, Azure DevOps pipeline'ları ve gerçek müşteri e-posta süreçlerini otomatikleştiren bir AI Mail Agent.",
-    humanSkills: "İnsani beceriler",
+    humanSkills: "Soft skills",
     soft: ["Takım çalışması", "Merak", "Zaman yönetimi", "Esneklik", "İletişim", "Müşteri odaklılık", "Yaratıcılık", "Titizlik", "Güvenilirlik"],
     learning: "Sürekli öğreniyorum; şu sıralar AI agent'lar ve Power Platform derinliklerindeyim."
   },
@@ -442,16 +434,14 @@ const tr: Dict = {
     eyebrow: "Yetenekler",
     title: "Tek yörünge, çok araç.",
     desc: "Modern web stack'leri, Microsoft Power Platform ve AI agent'lar. İşe uygun aracı seçerim, eksik olanları yolda öğrenirim.",
-    hint: "Döndürmek için sürükle · keşfetmek için gez"
+    hint: "Döndürmek için sürükle · incelemek için bir düğüme dokun"
   },
   services: {
     eyebrow: "Ne yapıyorum",
     title: "Fikirden çalışan ürüne.",
     items: [
-      { title: "Web Uygulamaları", desc: "Temiz arayüzlü, yeniden kullanılabilir bileşenli ve bakımı kolay full-stack uygulamalar." },
-      { title: "Front-End Geliştirme", desc: "React ile modern arayüzler: animasyon, erişilebilirlik ve özenli tipografi." },
-      { title: "Back-End & API Geliştirme", desc: "Node.js ve PHP ile REST API'lar, kimlik doğrulama akışları ve servisler." },
-      { title: "İş Otomasyonu", desc: "Tekrarlayan işleri ortadan kaldıran Power Apps, Power Automate ve Business Central çözümleri." },
+      { title: "Full-Stack Geliştirme", desc: "Uçtan uca web uygulamaları: React arayüzleri, Node.js & PHP backend'leri, REST API'lar ve bakımı kolay kod." },
+      { title: "Otomasyonlar", desc: "Tekrarlayan işleri ortadan kaldıran Power Apps, Power Automate ve Business Central çözümleri." },
       { title: "AI Agent & Entegrasyonlar", desc: "Gerçek veriyi okuyan, sınıflandıran ve harekete geçen yapay zeka destekli agent'lar ve entegrasyonlar." },
       { title: "Danışmanlık & İş Birliği", desc: "Fikirleri test edilebilir prototiplere dönüştürmek için tasarımcılar, geliştiriciler ve paydaşlarla çalışmak." }
     ]

@@ -57,7 +57,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden items-center gap-5 md:flex">
-          {navItems.map((item, i) => {
+          {navItems.map((item) => {
             const id = item.href.replace("#", "");
             const isActive = active === id;
             return (
@@ -68,7 +68,6 @@ export default function Navbar() {
                     isActive ? "text-a1" : "text-dim hover:text-ink"
                   }`}
                 >
-                  <span className="text-[9px] opacity-60">0{i + 1}</span>
                   <span className="underline-slide">{t.nav[item.key]}</span>
                 </a>
               </li>
@@ -113,7 +112,6 @@ export default function Navbar() {
                     className="flex items-center justify-between border-b border-edge/10 py-3.5 font-mono text-sm text-ink transition-colors hover:text-a1"
                   >
                     {t.nav[item.key]}
-                    <span className="text-xs text-a1/70">0{i + 1}</span>
                   </a>
                 </motion.li>
               ))}

@@ -27,6 +27,7 @@ export type Project = {
   features?: string[];
   image?: string;
   images?: string[];
+  visual?: "social";
 };
 
 export type ContactDetail = {
@@ -62,6 +63,36 @@ export const skillCloud = [
   "Azure DevOps", "AI Agents", "Craft CMS", "REST APIs", "CI/CD", "Prisma"
 ];
 
+/* Per-skill detail shown when a node is clicked in the sphere */
+export type SkillMeta = { group: string; level: number; note: string };
+
+export const skillMeta: Record<string, SkillMeta> = {
+  "JavaScript":       { group: "Frontend",   level: 5, note: "The language I reach for first — from the DOM to Node." },
+  "TypeScript":       { group: "Frontend",   level: 5, note: "Types everywhere. Safer refactors, fewer 2am bugs." },
+  "React":            { group: "Frontend",   level: 5, note: "Component-driven UIs with hooks and clean state." },
+  "Next.js":          { group: "Frontend",   level: 5, note: "My go-to full-stack React framework: SSR, routing, APIs." },
+  "Node.js":          { group: "Backend",    level: 4, note: "REST APIs, services and tooling on the server side." },
+  "PHP":              { group: "Backend",    level: 4, note: "Solid back-end work, mostly through Laravel." },
+  "Laravel":          { group: "Backend",    level: 4, note: "Elegant PHP APIs, auth and admin panels." },
+  "MySQL":            { group: "Database",   level: 4, note: "Relational schema design and tuned queries." },
+  "Supabase":         { group: "Backend",    level: 4, note: "Postgres, auth and realtime for app backends." },
+  "React Native":     { group: "Mobile",     level: 4, note: "Cross-platform mobile apps from one codebase." },
+  "Expo":             { group: "Mobile",     level: 4, note: "Fast React Native builds, OTA updates and native APIs." },
+  "Tailwind CSS":     { group: "Frontend",   level: 5, note: "Utility-first styling for fast, consistent UI." },
+  "Docker":           { group: "DevOps",     level: 4, note: "Containerised dev and deploy environments." },
+  "Git":              { group: "DevOps",     level: 5, note: "Version control, branching and clean history." },
+  "Business Central": { group: "Automation", level: 4, note: "Dynamics 365 ERP extensions built in AL." },
+  "AL":               { group: "Automation", level: 4, note: "The language behind Business Central extensions." },
+  "Power Apps":       { group: "Automation", level: 4, note: "Low-code business apps on the Power Platform." },
+  "Power Automate":   { group: "Automation", level: 5, note: "Automated business workflows, end to end." },
+  "Azure DevOps":     { group: "DevOps",     level: 4, note: "Pipelines, repos and solution deployments." },
+  "AI Agents":        { group: "AI",         level: 5, note: "Agents that read, decide and act on real data." },
+  "Craft CMS":        { group: "Backend",    level: 3, note: "Headless, multi-site content platforms." },
+  "REST APIs":        { group: "Backend",    level: 5, note: "Designing and consuming clean HTTP APIs." },
+  "CI/CD":            { group: "DevOps",     level: 4, note: "Automated build, test and deploy pipelines." },
+  "Prisma":           { group: "Backend",    level: 4, note: "Type-safe database access and migrations." }
+};
+
 export const techMarquee = [
   "React", "Next.js", "TypeScript", "Node.js", "Business Central", "AL",
   "Power Apps", "Power Automate", "Azure DevOps", "AI Agents", "Supabase",
@@ -83,6 +114,25 @@ export const projects: Project[] = [
       "Automated business workflows triggered from email content",
       "Integrated with Dynamics 365 Business Central",
       "Deployed through Azure DevOps solution pipelines"
+    ]
+  },
+  {
+    category: "AI · AUTOMATION · IN PROGRESS",
+    title: "Social Media Automation Platform",
+    visual: "social",
+    description:
+      "A SaaS platform I am actively building that turns content ideas into platform-ready social posts. AI generates captions, hooks and hashtags for X, Instagram, Facebook and YouTube, but nothing goes live until a human approves it from the dashboard or directly through Telegram. Built as a TypeScript monorepo with a Fastify API, a Next.js operations dashboard and a background worker on top of PostgreSQL and Prisma, with multi-workspace access control, compliance checks, rate limiting, audit logging and Stripe billing.",
+    stack: ["Next.js", "Fastify", "TypeScript", "Prisma", "PostgreSQL", "AI / LLM", "Telegram Bot API", "Docker", "Stripe"],
+    links: [
+      { label: "Currently in development · Private repo", variant: "muted" }
+    ],
+    features: [
+      "AI-generated, platform-specific captions, hooks and hashtags",
+      "Human approval workflow via dashboard and Telegram before anything is published",
+      "Multi-workspace setup with role-based access control (RBAC)",
+      "Pre-publish compliance guard, publish rate limiting and full audit logging",
+      "Monorepo architecture: Fastify API, Next.js dashboard and a background worker",
+      "Subscription billing with Stripe and tiered plans"
     ]
   },
   {

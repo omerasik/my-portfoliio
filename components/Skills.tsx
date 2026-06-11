@@ -1,78 +1,106 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { MousePointer2 } from "lucide-react";
+import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MousePointer2, Terminal as TerminalIcon } from "lucide-react";
+import { skillCloud, skillMeta } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 import SectionHeader from "@/components/ui/SectionHeader";
 import SkillSphere from "@/components/SkillSphere";
 
-/* Cycling terminal: types real commands with their output */
-const SESSIONS: { cmd: string; out: string[] }[] = [
-  { cmd: "whoami", out: ["omer_asik :: full-stack developer"] },
-  { cmd: "cat focus.txt", out: ["automation / ai agents / power platform"] },
-  { cmd: "./deploy.sh --target=prod", out: ["build passed", "shipped in 3.2s"] },
-  { cmd: "node mail-agent.js --run", out: ["42 emails processed", "0 touched by hand"] },
-  { cmd: "git log --oneline -1", out: ["a3f9c1e always learning, always shipping"] }
-];
+/* Interactive inspector: reacts to the skill clicked in the sphere */
+function SkillInspector({ selected }: { selected: string | null }) {
+  const groups = useMemo(() => {
+    const set = new Set(Object.values(skillMeta).map((m) => m.group));
+    return Array.from(set);
+  }, []);
 
-function Terminal() {
-  const [si, setSi] = useState(0);
-  const [typed, setTyped] = useState(0);
-  const [showOut, setShowOut] = useState(false);
-
-  useEffect(() => {
-    const session = SESSIONS[si];
-    const timers: ReturnType<typeof setTimeout>[] = [];
-
-    for (let i = 1; i <= session.cmd.length; i++) {
-      timers.push(setTimeout(() => setTyped(i), 350 + i * 55));
-    }
-    const afterCmd = 350 + session.cmd.length * 55 + 250;
-    timers.push(setTimeout(() => setShowOut(true), afterCmd));
-    timers.push(
-      setTimeout(() => {
-        setShowOut(false);
-        setTyped(0);
-        setSi((v) => (v + 1) % SESSIONS.length);
-      }, afterCmd + 2600)
-    );
-    return () => timers.forEach(clearTimeout);
-  }, [si]);
-
-  const session = SESSIONS[si];
+  const meta = selected ? skillMeta[selected] : null;
 
   return (
     <div className="panel ticks flex h-full min-h-[300px] flex-col p-0">
       <div className="flex items-center justify-between border-b border-edge/15 px-5 py-3">
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-dim">omer@dev: ~</span>
+        <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-dim">
+          <TerminalIcon size={12} className="text-a1" />
+          omer@dev: ~/skills
+        </span>
         <span className="flex gap-1.5">
           <span className="h-2 w-2 bg-a1/60" />
           <span className="h-2 w-2 bg-a3/60" />
           <span className="h-2 w-2 bg-a2/60" />
         </span>
       </div>
+
       <div className="flex-1 p-5 font-mono text-sm leading-7">
-        <p className="text-ink">
-          <span className="text-a1">$ </span>
-          {session.cmd.slice(0, typed)}
-          <span className="caret" />
-        </p>
-        {showOut &&
-          session.out.map((line, i) => (
-            <motion.p
-              key={line}
+        <AnimatePresence mode="wait">
+          {meta && selected ? (
+            <motion.div
+              key={selected}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+            >
+              <p className="text-ink">
+                <span className="text-a1">$ </span>inspect <span className="text-a2">{`"${selected}"`}</span>
+              </p>
+
+              <p className="mt-4 text-dim">
+                <span className="text-dim/60">group</span> &nbsp;:: <span className="text-a3">{meta.group}</span>
+              </p>
+
+              <p className="mt-1 flex items-center gap-2 text-dim">
+                <span className="text-dim/60">level</span> ::
+                <span className="tracking-[0.15em] text-a1">
+                  {"\u2588".repeat(meta.level)}
+                  <span className="text-edge/40">{"\u2591".repeat(5 - meta.level)}</span>
+                </span>
+                <span className="text-xs text-dim/70">{meta.level}/5</span>
+              </p>
+
+              <p className="mt-4 leading-relaxed text-ink/90">
+                <span className="text-a1">&gt; </span>
+                {meta.note}
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="empty"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: i * 0.15 }}
-              className="text-dim"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
             >
-              {line}
-            </motion.p>
-          ))}
+              <p className="text-ink">
+                <span className="text-a1">$ </span>select a node<span className="caret" />
+              </p>
+              <p className="mt-3 text-dim">Tap any skill in the orbit to inspect it.</p>
+
+              <p className="mt-6 text-dim/70">
+                <span className="text-dim/50"># groups</span>
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {groups.map((g) => (
+                  <span key={g} className="tag">
+                    {g}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
+
       <div className="border-t border-edge/15 px-5 py-2.5 font-mono text-[10px] text-dim">
-        <span className="text-a1">[OK]</span> 24 tools loaded / 0 categories needed
+        {meta ? (
+          <span>
+            <span className="text-a1">[OK]</span> node selected · {skillCloud.length} tools indexed
+          </span>
+        ) : (
+          <span>
+            <span className="text-a3">[..]</span> awaiting input · {skillCloud.length} tools indexed
+          </span>
+        )}
       </div>
     </div>
   );
@@ -80,6 +108,7 @@ function Terminal() {
 
 export default function Skills() {
   const { t } = useLang();
+  const [selected, setSelected] = useState<string | null>(null);
 
   return (
     <section id="skills" className="section-padding relative">
@@ -93,7 +122,7 @@ export default function Skills() {
           transition={{ duration: 0.8 }}
           className="relative lg:col-span-3"
         >
-          <SkillSphere />
+          <SkillSphere selected={selected} onSelect={(label) => setSelected((cur) => (cur === label ? null : label))} />
           <p className="mt-2 flex items-center justify-center gap-2 font-mono text-xs text-dim">
             <MousePointer2 size={12} className="text-a1" />
             {t.skills.hint}
@@ -107,7 +136,7 @@ export default function Skills() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="lg:col-span-2"
         >
-          <Terminal />
+          <SkillInspector selected={selected} />
         </motion.div>
       </div>
     </section>
