@@ -16,8 +16,10 @@ const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrai
 
 const SITE_URL = "https://omerasik.dev";
 
-/* Canonical name + every spelling people search for (diacritic / ASCII combos). */
-const FULL_NAME = "Ömer Faruk Aşık";
+/* Brand shown everywhere on the site is the ASCII "Omer Asik".
+   Turkish spellings live only in invisible SEO metadata (keywords + JSON-LD
+   alternateName/description) so Turkish searches still resolve to this person. */
+const FULL_NAME = "Omer Asik";
 const NAME_VARIATIONS = [
   "Ömer Faruk Aşık",
   "Omer Faruk Asik",
@@ -29,9 +31,9 @@ const NAME_VARIATIONS = [
   "Omer Asık"
 ];
 
-const TITLE = "Ömer Faruk Aşık (Omer Asik) | Full-Stack & Automation Developer";
+const TITLE = "Omer Asik | Full-Stack & Automation Developer";
 const DESCRIPTION =
-  "Ömer Faruk Aşık (Omer Asik) is a full-stack developer and automation engineer based in Ghent, Belgium — building web apps with React, Next.js and TypeScript and AI-driven automation on the Microsoft Power Platform and Dynamics 365 Business Central.";
+  "Omer Asik is a full-stack developer and automation engineer based in Ghent, Belgium — building web apps with React, Next.js and TypeScript and AI-driven automation on the Microsoft Power Platform and Dynamics 365 Business Central.";
 const PROFILE_IMAGE = `${SITE_URL}/images/me_formeel.png`;
 
 export const metadata: Metadata = {
@@ -51,7 +53,7 @@ export const metadata: Metadata = {
   authors: [{ name: FULL_NAME, url: SITE_URL }],
   creator: FULL_NAME,
   publisher: FULL_NAME,
-  applicationName: "Ömer Faruk Aşık (Omer Asik) — Portfolio",
+  applicationName: "Omer Asik — Portfolio",
   category: "technology",
   colorScheme: "dark light",
   themeColor: [
@@ -69,12 +71,12 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "Ömer Faruk Aşık (Omer Asik)",
+    siteName: "Omer Asik",
     locale: "en_GB",
     alternateLocale: ["nl_BE", "tr_TR", "fr_FR", "es_ES"],
     type: "profile",
-    firstName: "Ömer Faruk",
-    lastName: "Aşık",
+    firstName: "Omer",
+    lastName: "Asik",
     username: "omerasik"
   },
   twitter: {
@@ -124,9 +126,9 @@ const personJsonLd = {
       "@id": `${SITE_URL}/#person`,
       name: FULL_NAME,
       alternateName: NAME_VARIATIONS,
-      givenName: "Ömer",
+      givenName: "Omer",
       additionalName: "Faruk",
-      familyName: "Aşık",
+      familyName: "Asik",
       url: SITE_URL,
       image: PROFILE_IMAGE,
       email: "mailto:omerfarukasik54@gmail.com",
@@ -162,7 +164,7 @@ const personJsonLd = {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       url: SITE_URL,
-      name: "Ömer Faruk Aşık (Omer Asik)",
+      name: "Omer Asik",
       alternateName: ["Omer Asik Portfolio", "Ömer Aşık", "Omer Asik"],
       description: DESCRIPTION,
       inLanguage: ["en", "nl", "fr", "es", "tr"],
@@ -181,51 +183,11 @@ const personJsonLd = {
       primaryImageOfPage: PROFILE_IMAGE
     },
     {
-      "@type": "FAQPage",
-      "@id": `${SITE_URL}/#faq`,
-      inLanguage: "en",
-      about: { "@id": `${SITE_URL}/#person` },
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Who is Ömer Faruk Aşık (Omer Asik)?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Ömer Faruk Aşık (also written Omer Asik) is a full-stack developer and automation engineer based in Ghent, Belgium. He builds web applications and AI-driven business automation, currently working at Astena within the Microsoft ecosystem."
-          }
-        },
-        {
-          "@type": "Question",
-          name: "What does Omer Asik do?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "He builds full-stack web apps with React, Next.js, TypeScript, Node.js and Laravel, and automates business processes with the Microsoft Power Platform (Power Apps, Power Automate), Dynamics 365 Business Central (AL) and AI agents."
-          }
-        },
-        {
-          "@type": "Question",
-          name: "Where is Omer Asik based?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Ömer Faruk Aşık (Omer Asik) is based in Ghent (Gent), Belgium, and speaks English, Dutch and Turkish."
-          }
-        },
-        {
-          "@type": "Question",
-          name: "What technologies does Omer Asik use?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "React, Next.js, TypeScript, Node.js, PHP/Laravel, React Native/Expo, Tailwind CSS, Supabase, MySQL, Prisma, Docker, Git, Azure DevOps, Microsoft Power Platform, Dynamics 365 Business Central (AL) and AI agents."
-          }
-        }
-      ]
-    },
-    {
       "@type": "ItemList",
       "@id": `${SITE_URL}/#projects`,
-      name: "Projects by Ömer Faruk Aşık (Omer Asik)",
+      name: "Projects by Omer Asik",
       description:
-        "Selected web, mobile, automation and AI projects built by Ömer Faruk Aşık (Omer Asik).",
+        "Selected web, mobile, automation and AI projects built by Omer Asik.",
       itemListOrder: "https://schema.org/ItemListOrderDescending",
       numberOfItems: projectListItems.length,
       itemListElement: projectListItems

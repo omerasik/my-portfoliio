@@ -1,13 +1,13 @@
 import { ImageResponse } from "next/server";
 
 export const runtime = "edge";
-export const alt = "Ömer Faruk Aşık (Omer Asik) — Full-Stack & Automation Developer in Ghent, Belgium";
+export const alt = "Omer Asik — Full-Stack & Automation Developer in Ghent, Belgium";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Every glyph rendered below (incl. Turkish ş / ı / Ö) so Google returns one consolidated font file.
+// Glyph subset rendered below so Google returns one small consolidated font file.
 const TEXT =
-  "FULL-STACK · AUTOMATION · AI Ömer Faruk Aşık (Omer Asik) Full-Stack & Automation Developer Ghent · Belgium omerasik.dev";
+  "FULL-STACK · AUTOMATION · AI Omer Asik Full-Stack & Automation Developer Ghent · Belgium omerasik.dev";
 
 async function loadInter(weight: number): Promise<ArrayBuffer | null> {
   try {
@@ -51,13 +51,10 @@ export default async function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: 104, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2 }}>
-            Ömer Faruk Aşık
+          <div style={{ display: "flex", fontSize: 120, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2 }}>
+            Omer Asik
           </div>
-          <div style={{ display: "flex", fontSize: 40, fontWeight: 500, color: "#97adb2", marginTop: 6 }}>
-            (Omer Asik)
-          </div>
-          <div style={{ display: "flex", fontSize: 44, fontWeight: 800, color: "#56c6ff", marginTop: 22 }}>
+          <div style={{ display: "flex", fontSize: 44, fontWeight: 800, color: "#56c6ff", marginTop: 24 }}>
             Full-Stack &amp; Automation Developer
           </div>
         </div>

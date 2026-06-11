@@ -24,6 +24,7 @@ export default function LangSwitcher() {
         onClick={() => setOpen((v) => !v)}
         aria-label="Change language"
         aria-expanded={open}
+        lang="en"
         className="btn-chamfer flex h-10 items-center gap-2 border border-edge/25 bg-card/50 px-3 font-mono text-xs uppercase tracking-wider text-dim backdrop-blur transition-colors duration-300 hover:border-a1/50 hover:text-ink"
       >
         <Globe size={15} className="text-a1" />
@@ -50,8 +51,8 @@ export default function LangSwitcher() {
                     lang === l.code ? "bg-a1/10 text-a1" : "text-dim hover:bg-edge/10 hover:text-ink"
                   }`}
                 >
-                  {l.label}
-                  <span className="text-[10px] opacity-60">{l.code}</span>
+                  <span lang={l.code}>{l.label}</span>
+                  <span lang="en" className="text-[10px] opacity-60">{l.code}</span>
                 </button>
               </li>
             ))}

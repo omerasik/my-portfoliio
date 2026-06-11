@@ -48,7 +48,6 @@ export type Dict = {
     ready: string; heading1: string; heading2: string; body: string; button: string;
   };
   footer: { tagline: string };
-  faq: { eyebrow: string; title: string; items: { q: string; a: string }[] };
 };
 
 const en: Dict = {
@@ -66,7 +65,7 @@ const en: Dict = {
   about: {
     eyebrow: "About",
     title: "Curious by default, builder by choice.",
-    desc: "I'm Ömer Faruk Aşık (Omer Asik), a full-stack developer from Ghent, Belgium, currently at Astena working on business automation and AI inside the Microsoft ecosystem. I love the moment a new technology clicks and becomes a tool I can build with.",
+    desc: "I'm Omer Asik, a full-stack developer from Ghent, Belgium, currently at Astena working on business automation and AI inside the Microsoft ecosystem. I love the moment a new technology clicks and becomes a tool I can build with.",
     pillars: [
       { title: "Ship fast", desc: "Ideas become working products. I prototype quickly and iterate until it is solid." },
       { title: "Automate everything", desc: "If a task happens twice, I build a pipeline for it: from Power Automate flows to CI/CD." },
@@ -131,17 +130,7 @@ const en: Dict = {
     body: "Whether it is a web app, a business workflow or an AI agent, I would love to hear about it and figure out how to build it.",
     button: "Say hello"
   },
-  footer: { tagline: "Built with Next.js, caffeine and curiosity." },
-  faq: {
-    eyebrow: "FAQ",
-    title: "Who is Omer Asik?",
-    items: [
-      { q: "Who is Ömer Faruk Aşık (Omer Asik)?", a: "Ömer Faruk Aşık (also written Omer Asik) is a full-stack developer and automation engineer based in Ghent, Belgium. He builds web applications and AI-driven business automation, currently working at Astena within the Microsoft ecosystem." },
-      { q: "What does Omer Asik do?", a: "He builds full-stack web apps with React, Next.js, TypeScript, Node.js and Laravel, and automates business processes with the Microsoft Power Platform (Power Apps, Power Automate), Dynamics 365 Business Central (AL) and AI agents." },
-      { q: "Where is Omer Asik based?", a: "Ömer Faruk Aşık (Omer Asik) is based in Ghent (Gent), Belgium, and speaks English, Dutch and Turkish." },
-      { q: "What technologies does Omer Asik use?", a: "React, Next.js, TypeScript, Node.js, PHP/Laravel, React Native/Expo, Tailwind CSS, Supabase, MySQL, Prisma, Docker, Git, Azure DevOps, Microsoft Power Platform, Dynamics 365 Business Central (AL) and AI agents." }
-    ]
-  }
+  footer: { tagline: "Built with Next.js, caffeine and curiosity." }
 };
 
 const nl: Dict = {
@@ -159,7 +148,7 @@ const nl: Dict = {
   about: {
     eyebrow: "Over mij",
     title: "Nieuwsgierig van nature, bouwer uit overtuiging.",
-    desc: "Ik ben Ömer Faruk Aşık (Omer Asik), full-stack developer uit Gent, momenteel aan de slag bij Astena rond bedrijfsautomatisatie en AI binnen het Microsoft-ecosysteem. Ik hou van het moment waarop nieuwe technologie klikt en een tool wordt waarmee ik kan bouwen.",
+    desc: "Ik ben Omer Asik, full-stack developer uit Gent, momenteel aan de slag bij Astena rond bedrijfsautomatisatie en AI binnen het Microsoft-ecosysteem. Ik hou van het moment waarop nieuwe technologie klikt en een tool wordt waarmee ik kan bouwen.",
     pillars: [
       { title: "Snel opleveren", desc: "Ideeën worden werkende producten. Ik prototype snel en itereer tot het solide staat." },
       { title: "Alles automatiseren", desc: "Gebeurt een taak twee keer, dan bouw ik er een pipeline voor: van Power Automate-flows tot CI/CD." },
@@ -224,17 +213,7 @@ const nl: Dict = {
     body: "Of het nu een webapp, een bedrijfsworkflow of een AI-agent is: ik hoor er graag over en zoek mee uit hoe we het bouwen.",
     button: "Zeg hallo"
   },
-  footer: { tagline: "Gebouwd met Next.js, cafeïne en nieuwsgierigheid." },
-  faq: {
-    eyebrow: "FAQ",
-    title: "Wie is Omer Asik?",
-    items: [
-      { q: "Wie is Ömer Faruk Aşık (Omer Asik)?", a: "Ömer Faruk Aşık (ook geschreven als Omer Asik) is een full-stack developer en automation engineer uit Gent, België. Hij bouwt webapplicaties en AI-gedreven bedrijfsautomatisatie en werkt momenteel bij Astena binnen het Microsoft-ecosysteem." },
-      { q: "Wat doet Omer Asik?", a: "Hij bouwt full-stack webapps met React, Next.js, TypeScript, Node.js en Laravel, en automatiseert bedrijfsprocessen met het Microsoft Power Platform (Power Apps, Power Automate), Dynamics 365 Business Central (AL) en AI-agents." },
-      { q: "Waar woont Omer Asik?", a: "Ömer Faruk Aşık (Omer Asik) woont in Gent, België en spreekt Engels, Nederlands en Turks." },
-      { q: "Welke technologieën gebruikt Omer Asik?", a: "React, Next.js, TypeScript, Node.js, PHP/Laravel, React Native/Expo, Tailwind CSS, Supabase, MySQL, Prisma, Docker, Git, Azure DevOps, Microsoft Power Platform, Dynamics 365 Business Central (AL) en AI-agents." }
-    ]
-  }
+  footer: { tagline: "Gebouwd met Next.js, cafeïne en nieuwsgierigheid." }
 };
 
 const fr: Dict = {
@@ -252,7 +231,7 @@ const fr: Dict = {
   about: {
     eyebrow: "À propos",
     title: "Curieux par nature, bâtisseur par choix.",
-    desc: "Je suis Ömer Faruk Aşık (Omer Asik), développeur full-stack basé à Gand, en Belgique, actuellement chez Astena où je travaille sur l'automatisation d'entreprise et l'IA dans l'écosystème Microsoft. J'adore le moment où une nouvelle technologie fait sens et devient un outil avec lequel je peux construire.",
+    desc: "Je suis Omer Asik, développeur full-stack basé à Gand, en Belgique, actuellement chez Astena où je travaille sur l'automatisation d'entreprise et l'IA dans l'écosystème Microsoft. J'adore le moment où une nouvelle technologie fait sens et devient un outil avec lequel je peux construire.",
     pillars: [
       { title: "Livrer vite", desc: "Les idées deviennent des produits fonctionnels. Je prototype rapidement et j'itère jusqu'à ce que ce soit solide." },
       { title: "Tout automatiser", desc: "Si une tâche se répète, je construis un pipeline : des flux Power Automate au CI/CD." },
@@ -317,17 +296,7 @@ const fr: Dict = {
     body: "Qu'il s'agisse d'une app web, d'un workflow métier ou d'un agent IA, j'aimerais en entendre parler et trouver comment le construire.",
     button: "Dites bonjour"
   },
-  footer: { tagline: "Construit avec Next.js, de la caféine et de la curiosité." },
-  faq: {
-    eyebrow: "FAQ",
-    title: "Qui est Omer Asik ?",
-    items: [
-      { q: "Qui est Ömer Faruk Aşık (Omer Asik) ?", a: "Ömer Faruk Aşık (aussi écrit Omer Asik) est un développeur full-stack et ingénieur en automatisation basé à Gand, en Belgique. Il crée des applications web et de l'automatisation métier pilotée par l'IA, et travaille actuellement chez Astena au sein de l'écosystème Microsoft." },
-      { q: "Que fait Omer Asik ?", a: "Il développe des applications web full-stack avec React, Next.js, TypeScript, Node.js et Laravel, et automatise les processus métier avec Microsoft Power Platform (Power Apps, Power Automate), Dynamics 365 Business Central (AL) et des agents IA." },
-      { q: "Où est basé Omer Asik ?", a: "Ömer Faruk Aşık (Omer Asik) est basé à Gand (Gent), en Belgique, et parle anglais, néerlandais et turc." },
-      { q: "Quelles technologies utilise Omer Asik ?", a: "React, Next.js, TypeScript, Node.js, PHP/Laravel, React Native/Expo, Tailwind CSS, Supabase, MySQL, Prisma, Docker, Git, Azure DevOps, Microsoft Power Platform, Dynamics 365 Business Central (AL) et des agents IA." }
-    ]
-  }
+  footer: { tagline: "Construit avec Next.js, de la caféine et de la curiosité." }
 };
 
 const es: Dict = {
@@ -345,7 +314,7 @@ const es: Dict = {
   about: {
     eyebrow: "Sobre mí",
     title: "Curioso por naturaleza, constructor por elección.",
-    desc: "Soy Ömer Faruk Aşık (Omer Asik), desarrollador full-stack de Gante, Bélgica, actualmente en Astena trabajando en automatización empresarial e IA dentro del ecosistema Microsoft. Me encanta el momento en que una nueva tecnología hace clic y se convierte en una herramienta con la que puedo construir.",
+    desc: "Soy Omer Asik, desarrollador full-stack de Gante, Bélgica, actualmente en Astena trabajando en automatización empresarial e IA dentro del ecosistema Microsoft. Me encanta el momento en que una nueva tecnología hace clic y se convierte en una herramienta con la que puedo construir.",
     pillars: [
       { title: "Entregar rápido", desc: "Las ideas se convierten en productos funcionales. Hago prototipos rápido e itero hasta que queda sólido." },
       { title: "Automatizar todo", desc: "Si una tarea ocurre dos veces, construyo un pipeline: desde flujos de Power Automate hasta CI/CD." },
@@ -410,17 +379,7 @@ const es: Dict = {
     body: "Ya sea una app web, un flujo de negocio o un agente de IA, me encantaría escucharla y descubrir cómo construirla.",
     button: "Saluda"
   },
-  footer: { tagline: "Hecho con Next.js, cafeína y curiosidad." },
-  faq: {
-    eyebrow: "FAQ",
-    title: "¿Quién es Omer Asik?",
-    items: [
-      { q: "¿Quién es Ömer Faruk Aşık (Omer Asik)?", a: "Ömer Faruk Aşık (también escrito Omer Asik) es un desarrollador full-stack e ingeniero de automatización afincado en Gante, Bélgica. Crea aplicaciones web y automatización empresarial impulsada por IA, y actualmente trabaja en Astena dentro del ecosistema Microsoft." },
-      { q: "¿Qué hace Omer Asik?", a: "Desarrolla apps web full-stack con React, Next.js, TypeScript, Node.js y Laravel, y automatiza procesos de negocio con Microsoft Power Platform (Power Apps, Power Automate), Dynamics 365 Business Central (AL) y agentes de IA." },
-      { q: "¿Dónde reside Omer Asik?", a: "Ömer Faruk Aşık (Omer Asik) reside en Gante (Gent), Bélgica, y habla inglés, neerlandés y turco." },
-      { q: "¿Qué tecnologías usa Omer Asik?", a: "React, Next.js, TypeScript, Node.js, PHP/Laravel, React Native/Expo, Tailwind CSS, Supabase, MySQL, Prisma, Docker, Git, Azure DevOps, Microsoft Power Platform, Dynamics 365 Business Central (AL) y agentes de IA." }
-    ]
-  }
+  footer: { tagline: "Hecho con Next.js, cafeína y curiosidad." }
 };
 
 const tr: Dict = {
@@ -438,7 +397,7 @@ const tr: Dict = {
   about: {
     eyebrow: "Hakkımda",
     title: "Doğuştan meraklı, tercihen üretici.",
-    desc: "Ben Ömer Faruk Aşık (Omer Asik), Gent, Belçika merkezli bir full-stack geliştiriciyim; şu anda Astena'da Microsoft ekosistemi içinde iş otomasyonu ve yapay zeka üzerine çalışıyorum. Yeni bir teknolojinin oturduğu ve elimde üretken bir araca dönüştüğü anı çok seviyorum.",
+    desc: "Ben Omer Asik, Gent, Belçika merkezli bir full-stack geliştiriciyim; şu anda Astena'da Microsoft ekosistemi içinde iş otomasyonu ve yapay zeka üzerine çalışıyorum. Yeni bir teknolojinin oturduğu ve elimde üretken bir araca dönüştüğü anı çok seviyorum.",
     pillars: [
       { title: "Hızlı teslim et", desc: "Fikirler çalışan ürünlere dönüşür. Hızlı prototipler, sağlamlaşana kadar iterasyon." },
       { title: "Her şeyi otomatikleştir", desc: "Bir iş iki kez tekrar ediyorsa ona pipeline kurarım: Power Automate akışlarından CI/CD'ye kadar." },
@@ -503,17 +462,7 @@ const tr: Dict = {
     body: "Web uygulaması, iş akışı ya da AI agent; ne olursa olsun duymak ve birlikte nasıl inşa edeceğimizi bulmak isterim.",
     button: "Merhaba de"
   },
-  footer: { tagline: "Next.js, kafein ve merakla geliştirildi." },
-  faq: {
-    eyebrow: "SSS",
-    title: "Ömer Aşık kimdir?",
-    items: [
-      { q: "Ömer Faruk Aşık (Omer Asik) kimdir?", a: "Ömer Faruk Aşık (Omer Asik olarak da yazılır), Gent, Belçika merkezli bir full-stack geliştirici ve otomasyon mühendisidir. Web uygulamaları ve yapay zeka destekli iş otomasyonları geliştirir; şu anda Microsoft ekosistemi içinde Astena'da çalışmaktadır." },
-      { q: "Omer Asik ne iş yapıyor?", a: "React, Next.js, TypeScript, Node.js ve Laravel ile full-stack web uygulamaları geliştirir; iş süreçlerini Microsoft Power Platform (Power Apps, Power Automate), Dynamics 365 Business Central (AL) ve AI agent'larla otomatikleştirir." },
-      { q: "Omer Asik nerede yaşıyor?", a: "Ömer Faruk Aşık (Omer Asik), Gent, Belçika'da yaşıyor ve İngilizce, Felemenkçe ve Türkçe konuşuyor." },
-      { q: "Omer Asik hangi teknolojileri kullanıyor?", a: "React, Next.js, TypeScript, Node.js, PHP/Laravel, React Native/Expo, Tailwind CSS, Supabase, MySQL, Prisma, Docker, Git, Azure DevOps, Microsoft Power Platform, Dynamics 365 Business Central (AL) ve AI agent'lar." }
-    ]
-  }
+  footer: { tagline: "Next.js, kafein ve merakla geliştirildi." }
 };
 
 const DICTS: Record<Lang, Dict> = { en, nl, fr, es, tr };

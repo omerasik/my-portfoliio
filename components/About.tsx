@@ -95,25 +95,6 @@ export default function About() {
           </div>
         </motion.div>
       </div>
-
-      {/* GEO: plain-language Q&A that search and AI engines can quote directly */}
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.6 }}
-        className="mt-12"
-      >
-        <h3 className="font-display text-2xl font-bold sm:text-3xl">{t.faq.title}</h3>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {t.faq.items.map((item) => (
-            <div key={item.q} className="panel panel--quiet p-6">
-              <h4 className="font-display text-lg font-semibold text-ink">{item.q}</h4>
-              <p className="mt-2 text-sm leading-relaxed text-dim">{item.a}</p>
-            </div>
-          ))}
-        </div>
-      </motion.div>
     </section>
   );
 }
